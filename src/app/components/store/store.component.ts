@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Cart } from 'src/app/model/cart/cart.model';
 import { Product } from '../../model/product/product.model';
 import { ProductRepository } from '../../model/product/product.repository';
 
@@ -9,36 +11,37 @@ import { ProductRepository } from '../../model/product/product.repository';
 })
 export class StoreComponent {
   public selectedCategory: string = 'Category 1';
-  public productsPerPage: number = 4;
-  public selectedPage: number = 1;
 
   public storeProducts: Product[] = [];
-  public storeCategories: String[] = [];
+  public storeCategories: string[] = [];
 
-  constructor(public repository: ProductRepository) {
+  // TODO Add pagination for displaying store products after fetching them from product repository
+  constructor(
+    private repository: ProductRepository,
+    private cart: Cart,
+    private router: Router) 
+  {
     this.storeProducts = this.getProducts();
-    console.log("check ", this.storeProducts);
+    this.storeCategories = this.getCategories();
   }
 
   getProducts(): Product[] {
-    let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
-    return this.repository
-      .getProducts(this.selectedCategory)
-      .slice(pageIndex, pageIndex + this.productsPerPage);
+    this.storeProducts = this.repository.getProducts(this.selectedCategory);
+    return this.storeProducts;
   }
 
   getCategories(): string[] {
-    return this.repository.getCategories();
+    this.storeCategories = this.repository.getCategories()
+    return this.storeCategories;
   }
 
   changeCategory(newCategory?: string) {
-    if (newCategory)
-      this.selectedCategory = newCategory;
-    else
-      this.selectedCategory = 'Category 1';
+    this.selectedCategory = newCategory ? newCategory : 'Category 1';
+    this.getProducts();
   }
 
-  changePage(newPage: number) {
-    this.selectedPage = newPage;
+  addSelectedProductToCart(product: Product) {
+    this.cart.addCartItem(product);
+    this.router.navigateByUrl('/cart');
   }
 }

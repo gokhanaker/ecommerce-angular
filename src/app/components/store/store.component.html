@@ -12,7 +12,7 @@
 
       <button *ngFor="let cat of storeCategories"
            class="btn d-block btn-outline-primary"
-           [class.active]="cat == selectedCategory" (click)="changeCategory()">
+           [class.active]="cat == selectedCategory" (click)="changeCategory(cat)">
         {{cat}}
       </button>
     </div>
@@ -24,11 +24,12 @@
               {{product.name}}
             </h4>
             <span class="d-inline">
-                  {{product.price | currency:"USD"}}
+              {{product.price | currency:"USD"}}
             </span>
           <div>
             {{product.description}}
-            <button class="inline btn btn-success float-end">
+            <button class="inline btn btn-success float-end"
+              (click)="addSelectedProductToCart(product)">
               Add To Cart
             </button>
           </div>

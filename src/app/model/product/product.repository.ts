@@ -4,7 +4,7 @@ import { StaticDataSource } from "../static.datasource";
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class ProductRepository {
     public products: Product[] = [];
     public categories: string[] = [];
