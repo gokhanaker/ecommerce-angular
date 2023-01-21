@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="text-center">
+        <h3>
+            Your Cart
+        </h3>
+        <p>
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Product</th>
+                    <th class="text-center">Product Price</th>
+                    <th class="text-center">Product Total Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="cart.cartItems.length == 0">
+                    <td colspan="4" class="text-center">
+                        Your cart is empty
+                    </td>
+                </tr>
+
+                <tr *ngFor="let cartITem of cart.cartItems">
+                    <td colspan="4" class="text-center">
+                        Your cart is empty
+                    </td>
+                </tr>
+
+                <tr *ngFor="let cartItem of cart.cartItems">
+                    <td>
+                        <div class="form-group">
+                            <input type="number"
+                                    [value]="cartItem.quantity"
+                                    (change)="cart.updateQuantity(cartItem.product, 1)"/> <!-- TODO Change it-->
+                        </div>
+                    </td>
+                    <td>{{cartItem.product.name}}</td>
+                    <td class="text-center">
+                        {{cartItem.product.price}}
+                    </td>
+                    <td class="text-center">
+                        {{cartItem.product.price }}
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-danger"
+                                (click)="cart.removeCartItem(cartItem.product.id)">
+                                Remove
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            
+            <tfoot>
+                <tr class="active">
+                    <td colspan="3"> Total:</td>
+                    <td class= "text-center">
+                        {{cart.cartPrice }}
+                    </td> 
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+    <div class="container">
+        <button class="btn btn-primary" routerLink="/store">Go Back To Store </button>
+        <button class="btn btn-warning order" routerLink="/order" [disabled]="cart.cartItems.length == 0">
+            Order
+        </button>
+    </div>
+
+</div>

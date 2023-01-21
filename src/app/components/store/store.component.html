@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">Ecommerce Store</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <button class="btn d-block btn-outline-primary" (click)="changeCategory()">
+        Home
+      </button>
+
+      <button *ngFor="let cat of storeCategories"
+           class="btn d-block btn-outline-primary"
+           [class.active]="cat == selectedCategory" (click)="changeCategory()">
+        {{cat}}
+      </button>
+    </div>
+
+    <div class="col-md-8">
+      <div *ngFor="let product of storeProducts; let i=index">
+        <div>
+            <h4 class="text-left">
+              {{product.name}}
+            </h4>
+            <span class="d-inline">
+                  {{product.price | currency:"USD"}}
+            </span>
+          <div>
+            {{product.description}}
+            <button class="inline btn btn-success float-end">
+              Add To Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
