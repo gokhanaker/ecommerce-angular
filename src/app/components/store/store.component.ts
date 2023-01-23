@@ -7,7 +7,7 @@ import { ProductRepository } from '../../model/product/product.repository';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  styleUrls: ['./store.component.css'],
 })
 export class StoreComponent {
   public selectedCategory: string = 'Category 1';
@@ -19,8 +19,8 @@ export class StoreComponent {
   constructor(
     private repository: ProductRepository,
     private cart: Cart,
-    private router: Router) 
-  {
+    private router: Router
+  ) {
     this.storeProducts = this.getProducts();
     this.storeCategories = this.getCategories();
   }
@@ -31,7 +31,7 @@ export class StoreComponent {
   }
 
   getCategories(): string[] {
-    this.storeCategories = this.repository.getCategories()
+    this.storeCategories = this.repository.getCategories();
     return this.storeCategories;
   }
 

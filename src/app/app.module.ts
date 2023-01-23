@@ -15,19 +15,14 @@ import { FormsModule } from '@angular/forms';
 import { CreditCard } from './model/credit-cart/credit-card.model';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, RouterModule, AppRoutingModule, FormsModule],
   declarations: [
     AppComponent,
     StoreComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   providers: [Product, StaticDataSource, Cart, Order, CreditCard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

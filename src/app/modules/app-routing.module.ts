@@ -4,16 +4,15 @@ import { CartComponent } from '../components/cart/cart.component';
 import { CheckoutComponent } from '../components/checkout/checkout.component';
 import { StoreComponent } from '../components/store/store.component';
 
-
 const routes: Routes = [
-  {path: 'store', component: StoreComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'checkout', component: CheckoutComponent},
-  {path: '**', component: StoreComponent}
+  { path: 'store', component: StoreComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: '**', component: StoreComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
