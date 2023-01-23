@@ -9,29 +9,24 @@ export class Cart {
     public cartPrice: number = 0;
 
     addCartItem(product: Product, quantity: number = 1) {
-        let cartItem = this.cartItems.find(cartItem => cartItem.product.id === product.id);
+        let cartItem = this.cartItems.find(cartItem => cartItem.product.id === product.id); 
+        cartItem === undefined ? this.cartItems.push(new CartItem(product, quantity)) : cartItem.quantity++;
         
-        if(cartItem === undefined) {
-            this.cartItems.push(new CartItem(product, quantity));
-        } else {
-            cartItem.quantity++;
-        }
-
         this.cartCalculation();
     }
 
-    updateQuantity(product: Product, quantity: number) {
+    updateQuantity(product: Product, quantity: number = 1) {
         let cartItem = this.cartItems.find(cartItem => cartItem.product.id === product.id);
         
         if(cartItem !== undefined) {
             cartItem.quantity = quantity;
         }
+
         this.cartCalculation();
     }
 
     removeCartItem(id: number) {
-        let index = this.cartItems.findIndex(cartItem => cartItem.product.id === id);
-        this.cartItems.splice(index,1);
+        this.cartItems = this.cartItems.filter(cartItem => cartItem.product.id !== id);
         this.cartCalculation();
     }
 

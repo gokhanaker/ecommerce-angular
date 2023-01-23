@@ -1,11 +1,6 @@
 <div class="container">
     <div class="text-center">
-        <h3>
-            Your Cart
-        </h3>
-        <p>
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-        </p>
+        <h3>Your Cart</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -15,34 +10,23 @@
                     <th class="text-center">Product Total Price</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr *ngIf="cart.cartItems.length == 0">
                     <td colspan="4" class="text-center">
                         Your cart is empty
                     </td>
                 </tr>
-
-                <tr *ngFor="let cartITem of cart.cartItems">
-                    <td colspan="4" class="text-center">
-                        Your cart is empty
-                    </td>
-                </tr>
-
                 <tr *ngFor="let cartItem of cart.cartItems">
                     <td>
                         <div class="form-group">
                             <input type="number"
                                     [value]="cartItem.quantity"
-                                    (change)="cart.updateQuantity(cartItem.product, 1)"/> <!-- TODO Change it-->
+                                    (change)="cart.updateQuantity(cartItem.product, $event.target.value)"/>
                         </div>
                     </td>
                     <td>{{cartItem.product.name}}</td>
                     <td class="text-center">
                         {{cartItem.product.price}}
-                    </td>
-                    <td class="text-center">
-                        {{cartItem.product.price }}
                     </td>
                     <td class="text-center">
                         <button class="btn btn-danger"
@@ -51,8 +35,7 @@
                         </button>
                     </td>
                 </tr>
-            </tbody>
-            
+            </tbody>    
             <tfoot>
                 <tr class="active">
                     <td colspan="3"> Total:</td>
@@ -61,7 +44,6 @@
                     </td> 
                 </tr>
             </tfoot>
-
         </table>
     </div>
     <div class="container">
