@@ -7,7 +7,7 @@ import { ProductRepository } from '../../model/product/product.repository';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css'],
+  styleUrls: ['./store.component.css']
 })
 export class StoreComponent {
   public selectedCategory: string = 'Category 1';

@@ -20,9 +20,9 @@ import { CreditCard } from './model/credit-cart/credit-card.model';
     AppComponent,
     StoreComponent,
     CartComponent,
-    CheckoutComponent,
+    CheckoutComponent
   ],
   providers: [Product, StaticDataSource, Cart, Order, CreditCard],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

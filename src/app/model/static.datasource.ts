@@ -19,7 +19,7 @@ export class StaticDataSource {
     new Product(12, 'Product 12', 'Category 3', 'Product 12 (Category 3)', 100),
     new Product(13, 'Product 13', 'Category 3', 'Product 13 (Category 3)', 100),
     new Product(14, 'Product 14', 'Category 3', 'Product 14 (Category 3)', 100),
-    new Product(15, 'Product 15', 'Category 3', 'Product 15 (Category 3)', 100),
+    new Product(15, 'Product 15', 'Category 3', 'Product 15 (Category 3)', 100)
   ];
 
   // Using observable to fetch data

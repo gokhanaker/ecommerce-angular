@@ -8,11 +8,11 @@ const routes: Routes = [
   { path: 'store', component: StoreComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: '**', component: StoreComponent },
+  { path: '**', component: StoreComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

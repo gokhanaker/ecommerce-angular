@@ -8,7 +8,7 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CheckoutComponent],
+      declarations: [CheckoutComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CheckoutComponent);
