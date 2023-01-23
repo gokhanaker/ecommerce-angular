@@ -7,7 +7,7 @@ export class Order {
     public address: string;
     public city: string;
     public country: string;
-    public shipped: boolean;
+    public shipped: boolean = false;
 
     constructor(
         @Inject(Number) id: number,
@@ -15,7 +15,7 @@ export class Order {
         @Inject(String) address: string,
         @Inject(String) city: string,
         @Inject(String) country: string,
-        @Inject(String) shipped: boolean
+        @Inject(Boolean) shipped: boolean
     ) {
         this.id = id;
         this.name = name;
@@ -23,5 +23,13 @@ export class Order {
         this.city = city;
         this.country = country;
         this.shipped = shipped;
+    }
+
+    clear() {
+        this.name = "";
+        this.address = "";
+        this.city = "";
+        this.country = "";
+        this.shipped = false; 
     }
 }

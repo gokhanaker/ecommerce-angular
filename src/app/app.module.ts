@@ -11,12 +11,15 @@ import { StaticDataSource } from './model/static.datasource';
 import { Cart } from './model/cart/cart.model';
 import { Order } from './model/order/order.model';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FormsModule } from '@angular/forms';
+import { CreditCard } from './model/credit-cart/credit-card.model';
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -24,7 +27,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     CheckoutComponent
   ],
-  providers: [Product, StaticDataSource, Cart, Order],
+  providers: [Product, StaticDataSource, Cart, Order, CreditCard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,4 +18,11 @@ export class CreditCard {
         this.expiryDate = expiryDate;
         this.securityCode = securityCode;
     }
+
+    clear() {
+        this.holderName = "";
+        this.cardNumber = "";
+        this.expiryDate = "";
+        this.securityCode = "";
+    }
 }
