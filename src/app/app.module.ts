@@ -13,9 +13,16 @@ import { Order } from './model/order/order.model';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
 import { CreditCard } from './model/credit-cart/credit-card.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  imports: [BrowserModule, RouterModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
   declarations: [
     AppComponent,
     StoreComponent,
