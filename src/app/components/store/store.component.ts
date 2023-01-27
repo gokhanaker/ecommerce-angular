@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Cart } from 'src/app/model/cart/cart.model';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../../model/product/product.model';
-import { ProductRepository } from '../../model/product/product.repository';
 
 @Component({
   selector: 'app-store',
@@ -16,38 +15,45 @@ export class StoreComponent {
   public storeProducts: Product[] = [];
   public storeCategories: string[] = [];
 
+  public displayedProducts: Product[] = [];
+
   // TODO Add pagination for displaying store products after fetching them from product repository
   constructor(
-    private repository: ProductRepository,
     private cart: Cart,
     private router: Router,
     private productService: ProductService
-  ) {
-    this.storeProducts = this.getProducts();
-    this.storeCategories = this.getCategories();
-  }
+  ) {}
 
   ngOnInit() {
-    this.storeProducts = this.getProducts();
-    this.storeCategories = this.getCategories();
-    // this.storeProducts = this.productService.getProducts(this.selectedCategory);
-    // console.log('product list fetched is ', this.storeProducts);
+    this.loadProducts();
   }
 
-  getProducts() {
-    //this.storeProducts = this.productService.getProducts(this.selectedCategory);
-    this.storeProducts = this.repository.getProducts(this.selectedCategory);
-    return this.storeProducts;
+  loadProducts() {
+    this.productService.getApiProducts().subscribe((data: any) => {
+      this.storeProducts = data.products;
+      const productCategories = this.storeProducts.map(
+        (product) => product.category
+      );
+      this.storeCategories = [...new Set(productCategories)];
+    });
+  }
+
+  getProducts(category?: string) {
+    this.displayedProducts = category
+      ? this.storeProducts.filter((p) => p.category === category)
+      : this.storeProducts;
+  }
+
+  getProduct(id: number): Product | undefined {
+    return this.storeProducts.find((p) => p.id === id);
   }
 
   getCategories(): string[] {
-    this.storeCategories = this.repository.getCategories();
     return this.storeCategories;
   }
 
   changeCategory(newCategory?: string) {
-    this.selectedCategory = newCategory ? newCategory : 'Category 1';
-    this.getProducts();
+    this.getProducts(newCategory);
   }
 
   addSelectedProductToCart(product: Product) {
