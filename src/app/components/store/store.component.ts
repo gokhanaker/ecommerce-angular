@@ -10,11 +10,9 @@ import { Product } from '../../model/product/product.model';
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent {
-  public selectedCategory: string = 'Lord of the Rings Toys';
-
+  public selectedCategory: string = '';
   public storeProducts: Product[] = [];
   public storeCategories: string[] = [];
-
   public displayedProducts: Product[] = [];
 
   // TODO Add pagination for displaying store products after fetching them from product repository
@@ -40,7 +38,7 @@ export class StoreComponent {
 
   getProducts(category?: string) {
     this.displayedProducts = category
-      ? this.storeProducts.filter((p) => p.category === category)
+      ? this.storeProducts.filter(p => p.category === category)
       : this.storeProducts;
   }
 
