@@ -10,7 +10,8 @@ import { Order } from 'src/app/model/order/order.model';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent {
-  orderSubmitted = false;
+  submitted = false;
+  orderSent = false;
 
   constructor(
     public order: Order,
@@ -19,11 +20,12 @@ export class CheckoutComponent {
   ) {}
 
   submitOrder(form: NgForm) {
+    this.submitted = true;
     if (form.valid) {
-      this.orderSubmitted = true;
       this.order.clear();
       this.creditCard.clear();
       this.shoppingCart.clear();
+      this.orderSent = true;
     }
   }
 }
