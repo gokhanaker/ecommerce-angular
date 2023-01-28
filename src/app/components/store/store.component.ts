@@ -38,7 +38,7 @@ export class StoreComponent {
 
   getProducts(category?: string) {
     this.displayedProducts = category
-      ? this.storeProducts.filter(p => p.category === category)
+      ? this.storeProducts.filter((p) => p.category === category)
       : this.storeProducts;
   }
 

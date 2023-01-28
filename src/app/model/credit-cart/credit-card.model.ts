@@ -7,17 +7,7 @@ export class CreditCard {
   public expiryDate: string;
   public securityCode: string;
 
-  constructor(
-    @Inject(String) holderName: string,
-    @Inject(String) cardNumber: string,
-    @Inject(String) expiryDate: string,
-    @Inject(String) securityCode: string
-  ) {
-    this.holderName = holderName;
-    this.cardNumber = cardNumber;
-    this.expiryDate = expiryDate;
-    this.securityCode = securityCode;
-  }
+  constructor() {}
 
   clear() {
     this.holderName = '';
