@@ -10,12 +10,13 @@ import { RouterModule } from '@angular/router';
 import { Cart } from './model/cart/cart.model';
 import { Order } from './model/order/order.model';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreditCard } from './model/credit-cart/credit-card.model';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     RouterModule,
     AppRoutingModule,

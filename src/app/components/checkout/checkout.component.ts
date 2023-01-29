@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/model/cart/cart.model';
 import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
 import { Order } from 'src/app/model/order/order.model';
@@ -10,22 +10,37 @@ import { Order } from 'src/app/model/order/order.model';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent {
+  form: FormGroup;
   submitted = false;
   orderSent = false;
 
   constructor(
     public order: Order,
     public creditCard: CreditCard,
-    public shoppingCart: Cart
-  ) {}
+    public shoppingCart: Cart,
+    public fb: FormBuilder
+  ) {
+    this.createCheckoutForm(fb);
+  }
 
-  submitOrder(form: NgForm) {
+  createCheckoutForm(fb: FormBuilder) {
+    this.form = fb.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      city: ['', [Validators.required]],
+      country: ['', Validators.required]
+    });
+  }
+
+  submitOrder() {
+    console.log('form values are: ', this.form.value);
     this.submitted = true;
-    if (form.valid) {
+    if (this.form.valid) {
       this.order.clear();
       this.creditCard.clear();
       this.shoppingCart.clear();
       this.orderSent = true;
+      this.form.reset(); // Resetting fields
     }
   }
 }

@@ -13,62 +13,111 @@
       Please fill the form for product delivery
       <form
         *ngIf="!orderSent"
-        #form="ngForm"
-        novalidate
-        (ngSubmit)="submitOrder(form)"
+        (ngSubmit)="submitOrder()"
+        [formGroup]="form"
         class="m-2"
       >
         <div class="form-group">
-          <label>Name</label>
+          <label for="name">Name</label>
           <input
+            id="name"
             class="form-control"
-            #name="ngModel"
-            name="name"
-            [(ngModel)]="order.name"
-            required
+            type="text"
+            formControlName="name"
           />
-          <span *ngIf="submitted && name.invalid" class="text-danger">
-            Please enter your name
-          </span>
+          <div
+            *ngIf="
+              form.controls['name'].invalid &&
+              (form.controls['name'].dirty || form.controls['name'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div
+              *ngIf="
+                form.controls['name'].errors &&
+                form.controls['name'].errors.required
+              "
+            >
+              Please enter a name
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <label>Address</label>
+          <label for="address">Address</label>
           <input
+            id="address"
             class="form-control"
-            #address="ngModel"
-            name="address"
-            [(ngModel)]="order.address"
-            required
+            type="text"
+            formControlName="address"
           />
-          <span *ngIf="submitted && address.invalid" class="text-danger">
-            Please enter your address
-          </span>
+          <div
+            *ngIf="
+              form.controls['address'].invalid &&
+              (form.controls['address'].dirty ||
+                form.controls['address'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div
+              *ngIf="
+                form.controls['address'].errors &&
+                form.controls['address'].errors.required
+              "
+            >
+              Please enter an address
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <label>City</label>
+          <label for="city">City</label>
           <input
+            id="city"
             class="form-control"
-            #city="ngModel"
-            name="city"
-            [(ngModel)]="order.city"
-            required
+            type="text"
+            formControlName="city"
           />
-          <span *ngIf="submitted && city.invalid" class="text-danger">
-            Please enter your city
-          </span>
+          <div
+            *ngIf="
+              form.controls['city'].invalid &&
+              (form.controls['city'].dirty || form.controls['city'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div
+              *ngIf="
+                form.controls['city'].errors &&
+                form.controls['city'].errors.required
+              "
+            >
+              Please enter a city
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <label>Country</label>
+          <label for="country">Country</label>
           <input
+            id="country"
             class="form-control"
-            #country="ngModel"
-            name="country"
-            [(ngModel)]="order.country"
-            required
+            type="text"
+            formControlName="country"
           />
-          <span *ngIf="submitted && country.invalid" class="text-danger">
-            Please enter your country
-          </span>
+          <div
+            *ngIf="
+              form.controls['country'].invalid &&
+              (form.controls['country'].dirty ||
+                form.controls['country'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div
+              *ngIf="
+                form.controls['country'].errors &&
+                form.controls['country'].errors.required
+              "
+            >
+              Please enter a country
+            </div>
+          </div>
         </div>
         <div class="text-center">
           <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
