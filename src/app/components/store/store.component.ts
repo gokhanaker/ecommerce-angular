@@ -32,6 +32,7 @@ export class StoreComponent {
         (product) => product.category
       );
       this.storeCategories = [...new Set(productCategories)];
+      this.displayedProducts = this.storeProducts;
     });
   }
 
@@ -41,8 +42,12 @@ export class StoreComponent {
       : this.storeProducts;
   }
 
-  getProduct(id: number): Product | undefined {
+  getProductById(id: number): Product | undefined {
     return this.storeProducts.find((p) => p.id === id);
+  }
+
+  getProductByName(name: string): Product | undefined {
+    return this.storeProducts.find((p) => p.name === name);
   }
 
   getCategories(): string[] {
