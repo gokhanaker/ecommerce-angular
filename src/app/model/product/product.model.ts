@@ -5,20 +5,20 @@ export class Product {
   public id: number;
   public name: string;
   public category: string;
-  public description: string;
+  public image: string;
   public price: number;
 
   constructor(
     @Inject(Number) id: number,
     @Inject(String) name: string,
     @Inject(String) category: string,
-    @Inject(String) description: string,
+    @Inject(String) image: string,
     @Inject(Number) price: number
   ) {
     this.id = id;
     this.name = name;
     this.category = category;
-    this.description = description;
+    this.image = image;
     this.price = price;
   }
 }

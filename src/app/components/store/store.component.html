@@ -21,7 +21,7 @@
   <div class="row">
       <div *ngFor="let product of displayedProducts; let i=index" class="col-md-4">
             <div class="card flex-row">
-                <img class="card-img-left" src="https://m.media-amazon.com/images/I/71SH0vpid2L._AC_SL300_.jpg" alt="card image">
+                <img class="card-img-left" src={{product.image}} alt="card image">
                 <div class="card-body">
                     <h4 class="card-title">{{product.name}}</h4>
                     <p class="card-text"> {{product.price | currency:"USD"}} </p>                    

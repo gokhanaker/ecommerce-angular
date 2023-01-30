@@ -1,11 +1,10 @@
 <div class="container">
     <div class="text-center">
-        <h3>Your Cart</h3>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Quantity</th>
                     <th>Product</th>
+                    <th>Quantity</th>
                     <th class="text-center">Product Price</th>
                     <th class="text-center">Product Total Price</th>
                 </tr>
@@ -17,14 +16,15 @@
                     </td>
                 </tr>
                 <tr *ngFor="let cartItem of cart.cartItems">
+                    <td>{{cartItem.product.name}}</td>
                     <td>
                         <div class="form-group">
                             <input type="number"
+                                    class="form-control form-control-sm"
                                     [value]="cartItem.quantity"
                                     (change)="cart.updateQuantity(cartItem.product, $event.target.value)"/>
                         </div>
                     </td>
-                    <td>{{cartItem.product.name}}</td>
                     <td class="text-center">
                         {{cartItem.product.price}}
                     </td>
@@ -47,8 +47,8 @@
         </table>
     </div>
     <div class="container">
-        <button class="btn btn-primary" routerLink="/store">Go Back To Store </button>
-        <button class="btn btn-warning order" routerLink="/checkout" [disabled]="cart.cartItems.length == 0">
+        <button class="btn btn-info" routerLink="/store">Go Back To Store </button>
+        <button class="btn btn-primary" routerLink="/checkout" [disabled]="cart.cartItems.length == 0">
             Order
         </button>
     </div>
