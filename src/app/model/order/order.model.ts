@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 export class Order {
   public id: number;
   public name: string;
+  public email: string;
   public address: string;
   public city: string;
   public country: string;

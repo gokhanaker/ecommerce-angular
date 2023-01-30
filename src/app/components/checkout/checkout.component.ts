@@ -26,6 +26,7 @@ export class CheckoutComponent {
   createCheckoutForm(fb: FormBuilder) {
     this.form = fb.group({
       name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       city: ['', [Validators.required]],
       country: ['', Validators.required]

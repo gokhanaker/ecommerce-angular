@@ -15,7 +15,6 @@ export class StoreComponent {
   public storeCategories: string[] = [];
   public displayedProducts: Product[] = [];
 
-  // TODO Add pagination for displaying store products after fetching them from product repository
   constructor(
     private cart: Cart,
     private router: Router,
@@ -51,7 +50,10 @@ export class StoreComponent {
   }
 
   changeCategory(newCategory?: string) {
-    this.getProducts(newCategory);
+    if (newCategory) {
+      this.selectedCategory = newCategory;
+      this.getProducts(newCategory);
+    }
   }
 
   addSelectedProductToCart(product: Product) {
