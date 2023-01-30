@@ -46,8 +46,8 @@ export class StoreComponent {
     return this.storeProducts.find((p) => p.id === id);
   }
 
-  getProductByName(name: string): Product | undefined {
-    return this.storeProducts.find((p) => p.name === name);
+  getProductByName(name: string) {
+    this.displayedProducts = this.storeProducts.find((p) => p.name === name) ? this.storeProducts.filter((p) => p.name === name) : []
   }
 
   getCategories(): string[] {
