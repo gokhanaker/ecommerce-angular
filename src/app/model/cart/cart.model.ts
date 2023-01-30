@@ -16,7 +16,7 @@ export class Cart {
       ? this.cartItems.push(new CartItem(product, quantity))
       : cartItem.quantity++;
 
-    this.cartCalculation();
+    this.calculateCartPrice();
   }
 
   updateQuantity(product: Product, quantity: number = 1) {
@@ -28,17 +28,17 @@ export class Cart {
       cartItem.quantity = quantity;
     }
 
-    this.cartCalculation();
+    this.calculateCartPrice();
   }
 
   removeCartItem(id: number) {
     this.cartItems = this.cartItems.filter(
       (cartItem) => cartItem.product.id !== id
     );
-    this.cartCalculation();
+    this.calculateCartPrice();
   }
 
-  cartCalculation() {
+  calculateCartPrice() {
     this.itemCount = 0;
     this.cartPrice = 0;
     this.cartItems.forEach((cartItem) => {

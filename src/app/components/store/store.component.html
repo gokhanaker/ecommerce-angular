@@ -1,40 +1,35 @@
 <div class="container">
-  <div class="row">
-    <div class="col bg-dark text-white">
-      <a class="navbar-brand">Action Figure Store</a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <button class="btn d-block btn-outline-primary" (click)="changeCategory()">
-        Home
-      </button>
-
-      <button *ngFor="let cat of storeCategories"
-           class="btn d-block btn-outline-primary"
-           [class.active]="cat == selectedCategory" (click)="changeCategory(cat)">
-        {{cat}}
-      </button>
-    </div>
-
-    <div class="col-md-8">
-      <div *ngFor="let product of displayedProducts; let i=index">
-        <div>
-            <h4 class="text-left">
-              {{product.name}}
-            </h4>
-            <span class="d-inline">
-              {{product.price | currency:"USD"}}
-            </span>
-          <div>
-            {{product.description}}
-            <button class="inline btn btn-success float-end"
-              (click)="addSelectedProductToCart(product)">
-              Add To Cart
-            </button>
-          </div>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="javascript:void(0)">Action Figure Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li *ngFor="let cat of storeCategories" class="nav-item">
+              <a class="nav-link" (click)="changeCategory(cat)">{{cat}}</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="Search">
+            <button class="btn btn-primary" type="button">Search</button>
+          </form>
         </div>
       </div>
-    </div>
+  </nav>
+  <div class="row">
+      <div *ngFor="let product of displayedProducts; let i=index" class="col-md-4">
+            <div class="card flex-row">
+                <img class="card-img-left" src="https://m.media-amazon.com/images/I/71SH0vpid2L._AC_SL300_.jpg" alt="card image">
+                <div class="card-body">
+                    <h4 class="card-title">{{product.name}}</h4>
+                    <p class="card-text"> {{product.price | currency:"USD"}} </p>                    
+                    <a class="btn btn-primary"
+                      (click)="addSelectedProductToCart(product)">
+                    Add To Cart</a>
+                </div>
+            </div>
+      </div>
   </div>
 </div>
