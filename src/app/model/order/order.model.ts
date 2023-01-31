@@ -9,6 +9,7 @@ export class Order {
   public city: string;
   public country: string;
   public shipped: boolean = false;
+  public notes: string;
 
   constructor() {}
 
@@ -18,5 +19,6 @@ export class Order {
     this.city = '';
     this.country = '';
     this.shipped = false;
+    this.notes = '';
   }
 }

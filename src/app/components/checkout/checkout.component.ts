@@ -29,7 +29,12 @@ export class CheckoutComponent {
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       city: ['', [Validators.required]],
-      country: ['', Validators.required]
+      country: ['', Validators.required],
+      notes: ['', Validators.maxLength(300)],
+      cardHolderName: ['', Validators.required],
+      cardNumber: ['', Validators.required],
+      cardExpiryDate: ['', Validators.required],
+      cardSecurityCode: ['', Validators.required]
     });
   }
 

@@ -2,62 +2,60 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div class="text-center">
-                <table class="table table-hover table-responsive-sm">
-                    <caption>Selected action figures</caption>
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col" class="text-center">Product Price</th>
-                            <th scope="col" class="text-center">Product Total Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="cart.cartItems.length == 0">
-                            <td colspan="4" class="text-center">
-                                Your cart is empty
-                            </td>
-                        </tr>
-                        <tr *ngFor="let cartItem of cart.cartItems">
-                            <td>{{cartItem.product.name}}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="number"
-                                            min="0"
-                                            class="form-control form-control-sm"
-                                            [value]="cartItem.quantity"
-                                            (change)="cart.updateQuantity(cartItem.product, $event.target.value)"/>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                {{cartItem.product.price}}
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-danger"
-                                        (click)="cart.removeCartItem(cartItem.product.id)">
-                                        Remove
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>    
-                    <tfoot>
-                        <tr class="active">
-                            <td colspan="3"> Total:</td>
-                            <td class= "text-center">
-                                {{cart.cartPrice }}
-                            </td> 
-                        </tr>
-                    </tfoot>
-                </table>
+            <section>
+                <h3 class="text-center">Shopping Cart</h3>
+                <div class="text-center">
+                    <table class="table table-hover table-responsive-sm">
+                        <caption>Selected action figures</caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col" class="text-center">Product Price</th>
+                                <th scope="col" class="text-center">Product Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cartItem of cart.cartItems">
+                                <td>{{cartItem.product.name}}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number"
+                                                min="0"
+                                                class="form-control form-control-sm"
+                                                [value]="cartItem.quantity"
+                                                (change)="cart.updateQuantity(cartItem.product, $event.target.value)"/>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    {{cartItem.product.price}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger"
+                                            (click)="cart.removeCartItem(cartItem.product.id)">
+                                            Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>    
+                        <tfoot>
+                            <tr class="active">
+                                <td colspan="3"> Total:</td>
+                                <td class= "text-center">
+                                    {{cart.cartPrice }}
+                                </td> 
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div>
+                    <button class="btn btn-secondary" routerLink="/store">Go Back To Store </button>
+                    <button class="btn btn-primary" routerLink="/checkout" [disabled]="cart.cartItems.length == 0 || cart.cartPrice == 0">
+                        Order
+                    </button>
+                </div>
+            </section>
             </div>
-            <div>
-                <button class="btn btn-secondary" routerLink="/store">Go Back To Store </button>
-                <button class="btn btn-primary" routerLink="/checkout" [disabled]="cart.cartItems.length == 0 || cart.cartPrice == 0">
-                    Order
-                </button>
-            </div>
-        </div>
         <div class="col-md-2"></div>
     </div>
 </div>
