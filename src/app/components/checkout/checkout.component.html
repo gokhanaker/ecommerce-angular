@@ -9,12 +9,12 @@
   <div class="row">
     <div class="col-md-3"></div>
       <div class="card col-md-6">
-        <div class="card-header text-center">
-          <h3>Order Form </h3>
+        <div class="card-header text-center" style="background-color: #34568B;">
+          <h3 style="color: white;">Order Form </h3>
         </div>
         <div class="card-body" style="background-color: #92A8D1;">
             <section>
-              <h4 class="text-center">Product delivery</h4>
+              <h4 class="text-center" style="color: white;">Product delivery</h4>
               <form
                 *ngIf="!orderSent"
                 (ngSubmit)="submitOrder()"
@@ -22,7 +22,7 @@
                 class="m-2"
               >
                 <div class="form-group">
-                  <label for="name">Name</label>
+                  <label for="name" style="color: white;">Name</label>
                   <input
                     id="name"
                     class="form-control"
@@ -47,7 +47,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="email" style="color: white;">Email</label>
                   <input
                     id="email"
                     class="form-control"
@@ -73,7 +73,7 @@
                   </div>
                 </div>        
                 <div class="form-group">
-                  <label for="address">Address</label>
+                  <label for="address" style="color: white;">Address</label>
                   <input
                     id="address"
                     class="form-control"
@@ -99,7 +99,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="city">City</label>
+                  <label for="city" style="color: white;">City</label>
                   <input
                     id="city"
                     class="form-control"
@@ -124,7 +124,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="country">Country</label>
+                  <label for="country" style="color: white;">Country</label>
                   <input
                     id="country"
                     class="form-control"
@@ -150,7 +150,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="notes">Notes</label>
+                  <label for="notes" style="color: white;">Notes</label>
                   <textarea
                     id="notes"
                     class="form-control"
@@ -174,7 +174,7 @@
               </form>
             </section>
             <section>
-              <h4 class="text-center">Payment Details</h4>
+              <h4 class="text-center" style="color: white;">Payment Details</h4>
               <form
                 *ngIf="!orderSent"
                 (ngSubmit)="submitOrder()"
@@ -182,7 +182,7 @@
                 class="m-2"
               >
                 <div class="form-group">
-                  <label for="name">Holder Name</label>
+                  <label for="name" style="color: white;">Holder Name</label>
                   <input
                     id="cardHolderName"
                     class="form-control"
@@ -207,7 +207,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="name">Card Number</label>
+                  <label for="name" style="color: white;">Card Number</label>
                   <input
                     id="cardNumber"
                     class="form-control"
@@ -232,7 +232,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="cardExpiryDate">Expiry Date</label>
+                  <label for="cardExpiryDate" style="color: white;">Expiry Date</label>
                   <input
                     id="cardExpiryDate"
                     class="form-control"
@@ -257,7 +257,7 @@
                   </div>
                 </div>       
                 <div class="form-group">
-                  <label for="cardSecurityCode">Security Code</label>
+                  <label for="cardSecurityCode" style="color: white;">Security Code</label>
                   <input
                     id="cardSecurityCode"
                     class="form-control"
