@@ -1,10 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <section>
-                <h3 class="text-center">Shopping Cart</h3>
-                <div class="text-center">
+        <div class="col-md-8 card">
+                <h3 class="card-header text-center">Shopping Cart</h3>
+                <div class="card-body text-center">
                     <table class="table table-hover table-responsive-sm">
                         <caption>Selected action figures</caption>
                         <thead class="thead-light">
@@ -48,13 +47,12 @@
                         </tfoot>
                     </table>
                 </div>
-                <div>
+                <div class="card-footer">
                     <button class="btn btn-secondary" routerLink="/store">Go Back To Store </button>
                     <button class="btn btn-primary" routerLink="/checkout" [disabled]="cart.cartItems.length == 0 || cart.cartPrice == 0">
                         Order
                     </button>
                 </div>
-            </section>
             </div>
         <div class="col-md-2"></div>
     </div>
