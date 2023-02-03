@@ -1,18 +1,26 @@
-<div *ngIf="orderSent" class="m-2 text-center">
-  <h2>Thanks!</h2>
-  <p>Thanks for placing your order.</p>
-  <p>We'll ship your goods as soon as possible.</p>
-  <button class="btn btn-primary" routerLink="/store">Return to Store</button>
+<div *ngIf="orderSent" class="container">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 card text-center">
+        <div class="card-header">
+          <h3 >Your order is received </h3>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-primary" routerLink="/store">Back To Store</button>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 </div>
 
 <div *ngIf="!orderSent" class="container">
   <div class="row">
     <div class="col-md-3"></div>
       <div class="card col-md-6">
-        <div class="card-header text-center" style="background-color: #34568B;">
+        <div class="card-header text-center">
           <h3 >Order Form </h3>
         </div>
-        <div class="card-body" style="background-color: #92A8D1;">
+        <div class="card-body">
             <section>
               <h4 class="text-center">Product delivery</h4>
               <form
