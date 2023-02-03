@@ -60,6 +60,8 @@ export class StoreComponent {
     if (newCategory) {
       this.selectedCategory = newCategory;
       this.getProducts(newCategory);
+    } else {
+      this.displayedProducts = this.storeProducts;
     }
   }
 

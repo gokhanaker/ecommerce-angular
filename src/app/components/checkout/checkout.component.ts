@@ -32,9 +32,19 @@ export class CheckoutComponent {
       country: ['', Validators.required],
       notes: ['', Validators.maxLength(300)],
       cardHolderName: ['', Validators.required],
-      cardNumber: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(20)]],
+      cardNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(20)
+        ]
+      ],
       cardExpiryDate: ['', Validators.required],
-      cardSecurityCode: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]]
+      cardSecurityCode: [
+        '',
+        [Validators.required, Validators.maxLength(3), Validators.minLength(3)]
+      ]
     });
   }
 
