@@ -1,11 +1,11 @@
 <div class="container">
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" (click)="changeCategory()">Action Figure Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#actionFigureStoreNavbar">
+        <a class="navbar-brand" (click)="changeCategory()">Ecommerce Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ecommerceStoreNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="actionFigureStoreNavbar">
+        <div class="collapse navbar-collapse" id="ecommerceStoreNavbar">
           <ul class="navbar-nav me-auto">
             <li *ngFor="let cat of storeCategories" class="nav-item">
               <a class="nav-link" (click)="changeCategory(cat)">{{cat}}</a>
@@ -22,11 +22,11 @@
       <div *ngFor="let product of displayedProducts; let i=index" class="col-md-4">
             <div class="card flex-row">
                 <img 
-                  src="../../../assets/{{product.category}}/{{product.name}}.png" 
+                  src="{{product.image}}" 
                   class="card-img-left"  
-                  alt="action_figure image">
+                  alt="product_image">
                 <div class="card-body">
-                    <h4 class="card-title">{{product.name}}</h4>
+                    <h4 class="card-title">{{product.title}}</h4>
                     <p class="card-text"> {{product.price | currency:"USD"}} </p>                    
                     <a class="btn btn-primary"
                       (click)="addSelectedProductToCart(product)">

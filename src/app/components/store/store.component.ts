@@ -26,8 +26,9 @@ export class StoreComponent {
   }
 
   loadProducts() {
-    this.productService.getApiProducts().subscribe((data: any) => {
-      this.storeProducts = data.products;
+    this.productService.getAllProducts().subscribe((data: any) => {
+      this.storeProducts = data;
+      console.log(this.storeProducts);
       const productCategories = this.storeProducts.map(
         (product) => product.category
       );
@@ -36,7 +37,7 @@ export class StoreComponent {
     });
   }
 
-  getProducts(category?: string) {
+  getProductsByCategory(category?: string) {
     this.displayedProducts = category
       ? this.storeProducts.filter((p) => p.category === category)
       : this.storeProducts;
@@ -46,9 +47,9 @@ export class StoreComponent {
     return this.storeProducts.find((p) => p.id === id);
   }
 
-  getProductByName(name: string) {
-    this.displayedProducts = this.storeProducts.find((p) => p.name === name)
-      ? this.storeProducts.filter((p) => p.name === name)
+  getProductByName(title: string) {
+    this.displayedProducts = this.storeProducts.find((p) => p.title === title)
+      ? this.storeProducts.filter((p) => p.title === title)
       : [];
   }
 
@@ -59,7 +60,7 @@ export class StoreComponent {
   changeCategory(newCategory?: string) {
     if (newCategory) {
       this.selectedCategory = newCategory;
-      this.getProducts(newCategory);
+      this.getProductsByCategory(newCategory);
     } else {
       this.displayedProducts = this.storeProducts;
     }

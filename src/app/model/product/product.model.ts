@@ -3,22 +3,34 @@ import { Inject, Injectable } from '@angular/core';
 @Injectable()
 export class Product {
   public id: number;
-  public name: string;
+  public title: string;
+  public price: number;
+  public description: string;
   public category: string;
   public image: string;
-  public price: number;
+  public rating: {
+    rate: number;
+    count: number;
+  }
 
   constructor(
     @Inject(Number) id: number,
-    @Inject(String) name: string,
+    @Inject(String) title: string,
+    @Inject(Number) price: number,
+    @Inject(String) description: string,
     @Inject(String) category: string,
     @Inject(String) image: string,
-    @Inject(Number) price: number
+    @Inject(Object) rating: {
+      rate: number;
+      count: number;
+    }
   ) {
     this.id = id;
-    this.name = name;
+    this.title = title;
+    this.price = price;
+    this.description = description;
     this.category = category;
     this.image = image;
-    this.price = price;
+    this.rating = rating;
   }
 }

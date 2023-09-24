@@ -8,13 +8,31 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  private productServiceURL = 'http://localhost:3000/products';
+  private basePath = 'https://fakestoreapi.com';
 
   constructor(private http: HttpClient) {}
 
-  getApiProducts(): Observable<Product> {
+  getAllProducts(): Observable<Product> {
     return this.http
-      .get<Product>(this.productServiceURL)
+      .get<Product>(this.basePath + '/products?limit=9&sort=asc')
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getAllCategories(): Observable<string> {
+    return this.http
+      .get<string>(this.basePath + '/categories')
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getProductById(id: number): Observable<Product> {
+    return this.http
+      .get<Product>(this.basePath + '/products/' + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getProductsByCategory(category: string): Observable<Product> {
+    return this.http
+      .get<Product>(this.basePath + '/products/category/' + category)
       .pipe(retry(1), catchError(this.handleError));
   }
 
