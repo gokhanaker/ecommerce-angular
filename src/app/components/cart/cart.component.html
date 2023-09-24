@@ -16,7 +16,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let cartItem of cart.cartItems">
-                                <td>{{cartItem.product.title}}</td>
+                                <td>{{cartItem.product.title}}
+                                    <br>
+                                    <img src="{{cartItem.product.image}}" alt="product image" width="50" height="50">
+                                </td>
                                 <td>
                                     <div class="form-group">
                                         <input type="number"
