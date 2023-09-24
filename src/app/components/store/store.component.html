@@ -20,15 +20,20 @@
   </nav>
   <div class="row">
       <div *ngFor="let product of displayedProducts; let i=index" class="col-md-4">
-            <div class="card flex-row">
+            <div class="card flex-column p-3">
                 <img 
                   src="{{product.image}}" 
-                  class="card-img-left"  
-                  alt="product_image">
+                  class="card-img-top zoom-in-effect mx-auto"  
+                  alt="Product Image">
                 <div class="card-body">
-                    <h4 class="card-title">{{product.title}}</h4>
-                    <p class="card-text"> {{product.price | currency:"USD"}} </p>                    
-                    <a class="btn btn-primary"
+                    <h5 class="card-title">{{truncateProductTitle(product.title)}}</h5>
+                    <p class="card-text"> Price: {{product.price | currency:"USD"}} </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="rating">
+                        <span *ngFor="let star of generateStarsArray(product.rating.rate); let i=index" class="fa fa-star checked"></span>
+                        <span *ngFor="let star of generateStarsArray(5-product.rating.rate); let i=index" class="fa fa-star"></span>
+                      </div>
+                      <a class="btn btn-primary"
                       (click)="addSelectedProductToCart(product)">
                     Add To Cart</a>
                 </div>

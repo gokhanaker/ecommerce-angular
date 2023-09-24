@@ -70,4 +70,12 @@ export class StoreComponent {
     this.cart.addCartItem(product);
     this.router.navigateByUrl('/cart');
   }
+
+  generateStarsArray(rating: number): number[] {
+    return new Array(Math.trunc(rating));
+  }
+
+  truncateProductTitle(title: string): string {
+    return title.length > 30 ? title.slice(0, 30) + '...' : title;
+  }
 }
