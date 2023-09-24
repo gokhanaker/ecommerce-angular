@@ -19,7 +19,7 @@ describe('AppComponent', () => {
   it(`should have as title 'action figure store'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('action-figure-store');
+    expect(app.title).toEqual('ecommerce-angular');
   });
 
   it('should render title', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'action-figure-store app is running!'
+      'ecommerce-angular app is running!'
     );
   });
 });
