@@ -14,7 +14,7 @@ export class ProductService {
 
   getAllProducts(): Observable<Product> {
     return this.http
-      .get<Product>(this.basePath + '/products?limit=9&sort=asc')
+      .get<Product>(this.basePath + '/products?sort=asc')
       .pipe(retry(1), catchError(this.handleError));
   }
 

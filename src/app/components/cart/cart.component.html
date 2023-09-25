@@ -5,10 +5,9 @@
                 <h3 class="card-header text-center">Shopping Cart</h3>
                 <div class="card-body text-center">
                     <table class="table table-hover table-responsive-sm">
-                        <caption>Selected products</caption>
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Product</th>
+                                <th scope="col">Selected Products</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col" class="text-center">Product Price</th>
                                 <th scope="col" class="text-center">Product Total Price</th>
@@ -30,7 +29,7 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    {{cartItem.product.price}}
+                                    {{cartItem.product.price | currency:"USD"}}
                                 </td>
                                 <td class="text-center">
                                     <button class="btn btn-danger"
@@ -42,9 +41,11 @@
                         </tbody>    
                         <tfoot>
                             <tr class="active">
-                                <td colspan="3"> Total:</td>
+                                <td colspan="2"></td>
+                                <td colspan="1">Total Price:
+                                </td>
                                 <td class= "text-center">
-                                    {{cart.cartPrice }}
+                                    {{cart.cartPrice | currency:"USD" }}
                                 </td> 
                             </tr>
                         </tfoot>
