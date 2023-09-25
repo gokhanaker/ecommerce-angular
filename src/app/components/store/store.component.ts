@@ -28,7 +28,6 @@ export class StoreComponent {
   loadProducts() {
     this.productService.getAllProducts().subscribe((data: any) => {
       this.storeProducts = data;
-      console.log(this.storeProducts);
       const productCategories = this.storeProducts.map(
         (product) => product.category
       );
