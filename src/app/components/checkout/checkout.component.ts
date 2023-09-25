@@ -37,14 +37,13 @@ export class CheckoutComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(20)
+          Validators.pattern('[0-9]{10,20}'),
         ]
       ],
-      cardExpiryDate: ['', Validators.required],
+      cardExpiryDate: ['', Validators.required, Validators.minLength(4)],
       cardSecurityCode: [
         '',
-        [Validators.required, Validators.maxLength(3), Validators.minLength(3)]
+        [Validators.required, Validators.pattern('[0-9]{3}')]
       ]
     });
   }
@@ -57,7 +56,7 @@ export class CheckoutComponent {
       this.creditCard.clear();
       this.shoppingCart.clear();
       this.orderSent = true;
-      this.form.reset(); // Resetting fields
+      this.form.reset();
     }
   }
 }
