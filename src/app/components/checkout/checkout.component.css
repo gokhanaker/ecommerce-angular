@@ -13,3 +13,8 @@ section form button {
 .card-body {
     background-color: #92A8D1;
 }
+
+.card-body section .form-group {
+    width: 70%;
+    margin: 0 auto;
+}

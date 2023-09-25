@@ -13,6 +13,8 @@ export class CheckoutComponent {
   form: FormGroup;
   submitted = false;
   orderSent = false;
+  selectedCity: string = '';
+  cityList: string[] = ['Barcelona', 'Madrid', 'Valencia', 'Sevilla', 'Mallorca', 'Malaga'];
 
   constructor(
     public order: Order,
@@ -29,7 +31,6 @@ export class CheckoutComponent {
       email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
       city: ['', [Validators.required]],
-      country: ['', Validators.required],
       notes: ['', Validators.maxLength(300)],
       cardHolderName: ['', Validators.required],
       cardNumber: [
