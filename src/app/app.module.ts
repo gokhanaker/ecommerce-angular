@@ -13,6 +13,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreditCard } from './model/credit-cart/credit-card.model';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { environment } from './environments/environment';
 
 @NgModule({
   imports: [
@@ -21,8 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule],
   declarations: [
     AppComponent,
     StoreComponent,

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cart } from 'src/app/model/cart/cart.model';
 import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
 import { Order } from 'src/app/model/order/order.model';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +21,8 @@ export class CheckoutComponent {
     public order: Order,
     public creditCard: CreditCard,
     public shoppingCart: Cart,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private db: AngularFireDatabase
   ) {
     this.createCheckoutForm(fb);
   }
@@ -48,7 +50,7 @@ export class CheckoutComponent {
     });
   }
 
-  submitOrder() {
+  async submitOrder() {
     console.log('form values are: ', this.form.value);
     this.submitted = true;
     if (this.form.valid) {
@@ -56,6 +58,9 @@ export class CheckoutComponent {
       this.creditCard.clear();
       this.shoppingCart.clear();
       this.orderSent = true;
+      await this.db.list('/orders').push(this.form.value)
+      .then(() => console.log('Data added successfully'))
+      .catch(error => console.error('Error adding data', error));
       this.form.reset();
     }
   }
