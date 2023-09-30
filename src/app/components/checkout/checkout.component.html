@@ -246,7 +246,7 @@
               </div>
               <div class="text-center">
                 <button class="btn btn-secondary" routerLink="/cart">Back</button>
-                <button class="btn btn-primary" type="submit">
+              <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
                   Complete Order
                 </button>
               </div>

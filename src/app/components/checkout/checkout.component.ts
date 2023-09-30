@@ -50,17 +50,15 @@ export class CheckoutComponent {
     });
   }
 
-  async submitOrder() {
+   submitOrder() {
     console.log('form values are: ', this.form.value);
-    this.submitted = true;
     if (this.form.valid) {
+      this.submitted = true;
+      this.db.list('/orders').push(this.form.value)
       this.order.clear();
       this.creditCard.clear();
       this.shoppingCart.clear();
       this.orderSent = true;
-      await this.db.list('/orders').push(this.form.value)
-      .then(() => console.log('Data added successfully'))
-      .catch(error => console.error('Error adding data', error));
       this.form.reset();
     }
   }
