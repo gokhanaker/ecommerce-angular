@@ -62,7 +62,8 @@ export class CheckoutComponent {
     });
   }
 
-  generateOrderIdAndAttachItToFormData(){
+  generateOrderId(){
+    this.orderId = uuidv4();
     this.form.value.orderId = uuidv4();
   }
 
@@ -79,12 +80,17 @@ export class CheckoutComponent {
 
   async submitOrder() {
     if (this.form.valid) {
-      this.generateOrderIdAndAttachItToFormData();
-      console.log("form values: ", this.form.value);
-      await this.db.list('/orders').push(this.form.value)
-      this.submitted = true;
-      this.resetAndClearFields();
-      //this.redirectToOrderSentPage();
+      this.generateOrderId();
+      await this.db.object(`/orders/${this.orderId}`).set(this.form.value)
+      .then(() => {
+        console.log('Data sent succesfully to Firebase database');
+        this.submitted = true;
+        this.resetAndClearFields();
+        this.redirectToOrderSentPage();
+      })
+      .catch((error) => {
+        console.error('Error submitting data to Firebase database', error);
+      });
     }
   }
 }
