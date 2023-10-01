@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Cart } from 'src/app/model/cart/cart.model';
 import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
 import { Order } from 'src/app/model/order/order.model';
@@ -27,6 +27,17 @@ export class CheckoutComponent {
     this.createCheckoutForm(fb);
   }
 
+  futureTimeValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const inputDate = new Date(control.value);
+      const now = new Date();
+      if (inputDate.getTime() < now.getTime()) {
+        return { pastTime: true }; // return object if the validation is not passed.
+      }
+      return null; // return null if validation is passed.
+    };
+  }
+
   createCheckoutForm(fb: FormBuilder) {
     this.form = fb.group({
       name: ['', Validators.required],
@@ -42,7 +53,7 @@ export class CheckoutComponent {
           Validators.pattern('[0-9]{10,20}'),
         ]
       ],
-      cardExpiryDate: ['', Validators.required, Validators.minLength(4)],
+      cardExpiryDate: ['', [Validators.required, this.futureTimeValidator() ]],
       cardSecurityCode: [
         '',
         [Validators.required, Validators.pattern('[0-9]{3}')]
