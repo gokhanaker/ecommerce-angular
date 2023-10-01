@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { environment } from './environments/environment';
+import { OrderSentComponent } from './components/order-sent/order-sent.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { environment } from './environments/environment';
     AppComponent,
     StoreComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderSentComponent
   ],
   providers: [Product, Cart, Order, CreditCard],
   bootstrap: [AppComponent]

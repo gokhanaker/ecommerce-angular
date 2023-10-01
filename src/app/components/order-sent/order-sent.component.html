@@ -1,0 +1,26 @@
+<main class="card custom-card">
+  <div class="card-body">
+    <h5 class="card-title text-success">Order Confirmation</h5>
+    <p class="card-text text-muted">Thank you for your purchase!</p>
+    <p class="card-text text-muted">Your order has been successfully submitted.</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <strong>Order ID:</strong> ORDER ID
+    </li>
+    <li class="list-group-item">
+      <strong>Date:</strong> {{today}}
+    </li>
+    <li class="list-group-item">
+      <strong>Total Amount:</strong> TOTAL AMOUNT
+    </li>
+    <li class="list-group-item">
+      <strong>Shipping Address:</strong> SHIPPING ADDRESS
+    </li>
+  </ul>
+  <div class="card-body">
+    <button class="btn btn-primary custom-btn" (click)="backToStore()">Back to Store</button>
+  </div>
+</main>
+
+  

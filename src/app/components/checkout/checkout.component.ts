@@ -13,7 +13,6 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 export class CheckoutComponent {
   form: FormGroup;
   submitted = false;
-  orderSent = false;
   selectedCity: string = '';
   cityList: string[] = ['Barcelona', 'Madrid', 'Valencia', 'Sevilla', 'Mallorca', 'Malaga'];
 
@@ -64,12 +63,11 @@ export class CheckoutComponent {
    submitOrder() {
     console.log('form values are: ', this.form.value);
     if (this.form.valid) {
-      this.submitted = true;
       this.db.list('/orders').push(this.form.value)
+      this.submitted = true;
       this.order.clear();
       this.creditCard.clear();
       this.shoppingCart.clear();
-      this.orderSent = true;
       this.form.reset();
     }
   }
