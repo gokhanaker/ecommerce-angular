@@ -1,7 +1,7 @@
-<section *ngIf="!orderSent" class="container">
+<main *ngIf="!orderSent" class="container">
   <div class="row">
     <div class="col-md-3"></div>
-      <div class="card col-md-6">
+    <div class="card col-md-6">
         <div class="card-header text-center">
           <h3 >Order Form </h3>
         </div>
@@ -20,6 +20,9 @@
                   class="form-control"
                   type="text"
                   formControlName="name"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['name'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -28,14 +31,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['name'].errors &&
                       form.controls['name'].errors.required
                     "
                   >
                     Please enter a name
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="form-group mb-3">
@@ -45,6 +48,9 @@
                   class="form-control"
                   type="email"
                   formControlName="email"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['email'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -54,14 +60,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['email'].errors &&
                       (form.controls['email'].errors.required || form.controls['email'].errors.email)
                     "
                   >
                     Please enter a valid email
-                  </div>
+                  </span>
                 </div>
               </div>        
               <div class="form-group mb-3">
@@ -71,6 +77,9 @@
                   class="form-control"
                   type="text"
                   formControlName="address"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['address'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -80,21 +89,26 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['address'].errors &&
                       form.controls['address'].errors.required
                     "
                   >
                     Please enter an address
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="form-group mb-3">
                 <label for="cityDropdown">Select City</label>
-                <select class="form-select" id="cityDropdown" name="city" formControlName="city">
+                <select class="form-select" 
+                  id="cityDropdown"
+                  name="city" 
+                  formControlName="city"
+                  [ngClass]="{'valid-field': form.controls['city'].valid}"
+                >
                   <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
-                  </select>
+                </select>
                 <div
                   *ngIf="
                     form.controls['city'].invalid &&
@@ -102,14 +116,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['city'].errors &&
                       form.controls['city'].errors.required
                     "
                   >
-                    Please enter a city
-                  </div>
+                    Please select a city
+                  </span>
                 </div>
               </div>
               <div class="form-group mb-3">
@@ -118,6 +132,9 @@
                   id="notes"
                   class="form-control"
                   formControlName="notes"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['notes'].valid && form.controls['notes'].value.length > 0
+                  }"
                 ></textarea>
                 <div
                   *ngIf="
@@ -127,11 +144,11 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="form.controls['notes'].errors"
                   >
                     Notes section can not be longer than 300 characters
-                  </div>
+                  </span>
                 </div>
               </div>
             </form>
@@ -151,6 +168,9 @@
                   class="form-control"
                   type="text"
                   formControlName="cardHolderName"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['cardHolderName'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -159,14 +179,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['cardHolderName'].errors &&
                       form.controls['cardHolderName'].errors.required
                     "
                   >
                     Please enter a card holder name
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="form-group mb-3">
@@ -176,6 +196,9 @@
                   class="form-control"
                   type="text"
                   formControlName="cardNumber"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['cardNumber'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -184,14 +207,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['cardNumber'].errors &&
                       form.controls['cardNumber'].errors.required
                     "
                   >
                     Please enter a card number
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="form-group mb-3">
@@ -201,6 +224,9 @@
                   class="form-control"
                   type="month"
                   formControlName="cardExpiryDate"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['cardExpiryDate'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -209,14 +235,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['cardExpiryDate'].errors &&
                       form.controls['cardExpiryDate'].errors.required
                     "
                   >
                     Please enter a card expiry date
-                  </div>
+                  </span>
                 </div>
               </div>       
               <div class="form-group mb-3">
@@ -226,6 +252,9 @@
                   class="form-control"
                   type="text"
                   formControlName="cardSecurityCode"
+                  [ngClass]="{ 
+                    'valid-field': form.controls['cardSecurityCode'].valid
+                  }"
                 />
                 <div
                   *ngIf="
@@ -234,14 +263,14 @@
                   "
                   class="alert alert-danger"
                 >
-                  <div
+                  <span
                     *ngIf="
                       form.controls['cardSecurityCode'].errors &&
                       form.controls['cardSecurityCode'].errors.required
                     "
                   >
                     Please enter a card security code
-                  </div>
+                  </span>
                 </div>
               </div>
               <div class="text-center">
@@ -253,10 +282,10 @@
             </form>
           </section>
         </div>
-      </div>
+    </div>
     <div class="col-md-3"></div>
   </div>
-</section>
+</main>
 
 <section *ngIf="orderSent" class="container">
   <div class="row">

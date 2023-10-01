@@ -18,3 +18,13 @@ section form button {
     width: 70%;
     margin: 0 auto;
 }
+
+.card-body form .valid-field {
+    background-color: #90ee90;
+    border: 1px solid green;
+}
+
+.card-body form .invalid-field {
+    background-color: lightcoral;
+    border: 1px solid red;
+}
