@@ -5,6 +5,7 @@ import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
 import { Order } from 'src/app/model/order/order.model';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { v4 as uuidv4 } from 'uuid';
+import { OrderService } from 'src/app/services/order/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,7 +24,8 @@ export class CheckoutComponent {
     public creditCard: CreditCard,
     public shoppingCart: Cart,
     public fb: FormBuilder,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    public orderservice: OrderService,
   ) {
     this.createCheckoutForm(fb);
   }
@@ -85,6 +87,7 @@ export class CheckoutComponent {
       .then(() => {
         console.log('Data sent succesfully to Firebase database');
         this.submitted = true;
+        this.orderservice.setOrderData(this.form.value);
         this.resetAndClearFields();
         this.redirectToOrderSentPage();
       })
