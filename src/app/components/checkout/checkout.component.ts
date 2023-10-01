@@ -4,6 +4,7 @@ import { Cart } from 'src/app/model/cart/cart.model';
 import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
 import { Order } from 'src/app/model/order/order.model';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-checkout',
@@ -15,6 +16,7 @@ export class CheckoutComponent {
   submitted = false;
   selectedCity: string = '';
   cityList: string[] = ['Barcelona', 'Madrid', 'Valencia', 'Sevilla', 'Mallorca', 'Malaga'];
+  orderId: string;
 
   constructor(
     public order: Order,
@@ -60,15 +62,29 @@ export class CheckoutComponent {
     });
   }
 
-   submitOrder() {
-    console.log('form values are: ', this.form.value);
+  generateOrderIdAndAttachItToFormData(){
+    this.form.value.orderId = uuidv4();
+  }
+
+  resetAndClearFields() {
+    this.order.clear();
+    this.creditCard.clear();
+    this.shoppingCart.clear();
+    this.form.reset();
+  }
+
+  redirectToOrderSentPage(){
+    window.location.href = "/order-sent";
+  }
+
+  async submitOrder() {
     if (this.form.valid) {
-      this.db.list('/orders').push(this.form.value)
+      this.generateOrderIdAndAttachItToFormData();
+      console.log("form values: ", this.form.value);
+      await this.db.list('/orders').push(this.form.value)
       this.submitted = true;
-      this.order.clear();
-      this.creditCard.clear();
-      this.shoppingCart.clear();
-      this.form.reset();
+      this.resetAndClearFields();
+      //this.redirectToOrderSentPage();
     }
   }
 }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./order-sent.component.css']
 })
 export class OrderSentComponent {
-  readonly today = new Date();
+  readonly today = new Date().toDateString();
 
   backToStore() {
     window.location.href = "/store";
