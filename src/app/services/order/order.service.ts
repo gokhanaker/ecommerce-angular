@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
-  data: any;
+  public data: any;
   constructor() { }
 
   setOrderData(data: any) {

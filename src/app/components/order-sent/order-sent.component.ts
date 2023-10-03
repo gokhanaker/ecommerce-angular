@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order/order.service';
 
 @Component({
@@ -7,19 +8,20 @@ import { OrderService } from 'src/app/services/order/order.service';
   styleUrls: ['./order-sent.component.css']
 })
 export class OrderSentComponent {
-  orderService: OrderService
-  today: string;
-  orderId: string;
-  orderAddress: string;
+  public today: string;
+  public orderId: string;
+  public orderAddress: string;
 
-  componentWillMount(){
+  constructor(private orderService: OrderService, private router: Router){}
+
+  ngOnInit() {
     this.today = new Date().toDateString();
+    console.log("orderService data: ", this.orderService.getOrderData());
     this.orderId = this.orderService.getOrderData().orderId;
     this.orderAddress = this.orderService.getOrderData().address;
   }
-  constructor(){}
 
   backToStore() {
-    window.location.href = "/store";
+    this.router.navigate(['/store']);
   }
 }

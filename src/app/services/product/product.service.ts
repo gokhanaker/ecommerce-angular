@@ -38,13 +38,10 @@ export class ProductService {
 
   handleError(error: any) {
     let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
+    if (error.error instanceof ErrorEvent)
+      errorMessage = error.error.message; // Get client-side error
+    else
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;  // Get server-side error
     console.log(errorMessage);
     return throwError(() => {
       return errorMessage;

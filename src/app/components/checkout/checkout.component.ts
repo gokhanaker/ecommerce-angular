@@ -6,6 +6,7 @@ import { Order } from 'src/app/model/order/order.model';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderService } from 'src/app/services/order/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -25,7 +26,8 @@ export class CheckoutComponent {
     public shoppingCart: Cart,
     public fb: FormBuilder,
     private db: AngularFireDatabase,
-    public orderservice: OrderService,
+    public orderService: OrderService,
+    private router: Router
   ) {
     this.createCheckoutForm(fb);
   }
@@ -77,7 +79,7 @@ export class CheckoutComponent {
   }
 
   redirectToOrderSentPage(){
-    window.location.href = "/order-sent";
+    this.router.navigate(['/order-sent']);
   }
 
   async submitOrder() {
@@ -87,7 +89,7 @@ export class CheckoutComponent {
       .then(() => {
         console.log('Data sent succesfully to Firebase database');
         this.submitted = true;
-        this.orderservice.setOrderData(this.form.value);
+        this.orderService.setOrderData(this.form.value);
         this.resetAndClearFields();
         this.redirectToOrderSentPage();
       })
