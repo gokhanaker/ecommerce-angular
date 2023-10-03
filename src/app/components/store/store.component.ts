@@ -10,10 +10,10 @@ import { Product } from '../../model/product/product.model';
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent {
-  public selectedCategory: string = '';
-  public storeProducts: Product[] = [];
-  public storeCategories: string[] = [];
-  public displayedProducts: Product[] = [];
+  selectedCategory: string = '';
+  storeProducts: Product[] = [];
+  storeCategories: string[] = [];
+  displayedProducts: Product[] = [];
 
   constructor(
     private cart: Cart,
@@ -62,12 +62,12 @@ export class StoreComponent {
       this.getProductsByCategory(newCategory);
     } else {
       this.displayedProducts = this.storeProducts;
-    }
+    } 
   }
 
   addSelectedProductToCart(product: Product) {
     this.cart.addCartItem(product);
-    this.router.navigateByUrl('/cart');
+    this.router.navigate(['/cart']);
   }
 
   generateStarsArray(rating: number): number[] {

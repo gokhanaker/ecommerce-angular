@@ -21,12 +21,12 @@ export class CheckoutComponent {
   orderId: string;
 
   constructor(
-    public order: Order,
-    public creditCard: CreditCard,
-    public shoppingCart: Cart,
-    public fb: FormBuilder,
+    private order: Order,
+    private creditCard: CreditCard,
+    private shoppingCart: Cart,
+    private fb: FormBuilder,
     private db: AngularFireDatabase,
-    public orderService: OrderService,
+    private orderService: OrderService,
     private router: Router
   ) {
     this.createCheckoutForm(fb);

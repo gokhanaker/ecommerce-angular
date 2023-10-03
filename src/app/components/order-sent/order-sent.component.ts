@@ -8,9 +8,9 @@ import { OrderService } from 'src/app/services/order/order.service';
   styleUrls: ['./order-sent.component.css']
 })
 export class OrderSentComponent {
-  public today: string;
-  public orderId: string;
-  public orderAddress: string;
+  today: string;
+  orderId: string;
+  orderAddress: string;
 
   constructor(private orderService: OrderService, private router: Router){}
 
