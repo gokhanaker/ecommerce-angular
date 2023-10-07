@@ -17,7 +17,6 @@ export class OrderSentComponent {
 
   ngOnInit() {
     this.today = new Date().toDateString();
-    console.log("orderService data: ", this.orderService.getOrderData());
     this.orderId = this.orderService.getOrderData().orderId;
     this.orderAddress = this.orderService.getOrderData().address;
     this.totalPrice = this.orderService.getOrderData().totalPurchasePrice;
