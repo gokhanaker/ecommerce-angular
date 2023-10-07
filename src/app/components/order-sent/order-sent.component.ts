@@ -11,6 +11,7 @@ export class OrderSentComponent {
   today: string;
   orderId: string;
   orderAddress: string;
+  totalPrice: number;
 
   constructor(private orderService: OrderService, private router: Router){}
 
@@ -19,6 +20,7 @@ export class OrderSentComponent {
     console.log("orderService data: ", this.orderService.getOrderData());
     this.orderId = this.orderService.getOrderData().orderId;
     this.orderAddress = this.orderService.getOrderData().address;
+    this.totalPrice = this.orderService.getOrderData().totalPurchasePrice;
   }
 
   backToStore() {

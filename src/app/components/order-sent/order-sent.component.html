@@ -14,6 +14,9 @@
     <li class="list-group-item">
       <strong>Shipping Address:</strong> {{orderAddress}}
     </li>
+    <li class="list-group-item">
+      <strong>Total Price:</strong> {{totalPrice | currency:"USD"}}
+    </li>
   </ul>
   <div class="card-body">
     <button class="btn btn-primary custom-btn" (click)="backToStore()">Back to Store</button>
