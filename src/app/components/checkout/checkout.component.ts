@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Cart } from 'src/app/model/cart/cart.model';
 import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   selectedCity: string = '';
@@ -27,9 +27,12 @@ export class CheckoutComponent {
     private fb: FormBuilder,
     private db: AngularFireDatabase,
     private orderService: OrderService,
-    private router: Router
-  ) {
-    this.createCheckoutForm(fb);
+    private router: Router,
+    private cart: Cart
+  ) {}
+
+  ngOnInit() {
+    this.createCheckoutForm(this.fb);
   }
 
   futureTimeValidator(): ValidatorFn {
@@ -71,6 +74,11 @@ export class CheckoutComponent {
     this.form.value.orderId = uuidv4();
   }
 
+  addCartItemDataToOrder(){
+    this.form.value.cartItems = this.cart.getCartItems();
+    this.form.value.totalPurchasePrice = this.cart.getCartPrice();
+  }
+
   resetAndClearFields() {
     this.order.clear();
     this.creditCard.clear();
@@ -85,6 +93,7 @@ export class CheckoutComponent {
   async submitOrder() {
     if (this.form.valid) {
       this.generateOrderId();
+      this.addCartItemDataToOrder();
       await this.db.object(`/orders/${this.orderId}`).set(this.form.value)
       .then(() => {
         console.log('Data sent succesfully to Firebase database');

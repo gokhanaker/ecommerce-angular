@@ -47,6 +47,14 @@ export class Cart {
     });
   }
 
+  getCartPrice(): number {
+    return this.cartPrice;
+  }
+
+  getCartItems(): CartItem[] {
+    return this.cartItems;
+  }
+
   clear() {
     this.cartItems = [];
     this.itemCount = 0;
