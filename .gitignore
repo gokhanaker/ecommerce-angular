@@ -1,8 +1,7 @@
 # Compiled output
 /dist
 /tmp
-/out-tsc
-/bazel-out
+
 
 # Node
 /node_modules
@@ -17,11 +16,13 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-
-# Visual Studio Code
 .vscode/*
 .codegpt
 .editorconfig
+
+# Environment variables
+src/app/environments/environment.ts
+
 
 # Miscellaneous
 /.angular/cache
