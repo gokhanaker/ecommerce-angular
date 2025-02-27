@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/model/cart/cart.model';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Product } from '../../model/product/product.model';
+import { Cart } from '@models/cart/cart.model';
+import { ProductService } from '@services/product/product.service';
+import { Product } from '@models/product/product.model';
 
 @Component({
   selector: 'app-store',
@@ -62,7 +62,7 @@ export class StoreComponent {
       this.getProductsByCategory(newCategory);
     } else {
       this.displayedProducts = this.storeProducts;
-    } 
+    }
   }
 
   addSelectedProductToCart(product: Product) {

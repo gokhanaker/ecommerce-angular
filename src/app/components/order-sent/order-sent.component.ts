@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService } from 'src/app/services/order/order.service';
+import { OrderService } from '@services/order/order.service';
 
 @Component({
   selector: 'app-order-sent',
@@ -13,7 +13,7 @@ export class OrderSentComponent {
   orderAddress: string;
   totalPrice: number;
 
-  constructor(private orderService: OrderService, private router: Router){}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit() {
     this.today = new Date().toDateString();

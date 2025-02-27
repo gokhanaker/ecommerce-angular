@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Cart } from 'src/app/model/cart/cart.model';
-import { CreditCard } from 'src/app/model/credit-cart/credit-card.model';
-import { Order } from 'src/app/model/order/order.model';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
+import { Cart } from '@models/cart/cart.model';
+import { CreditCard } from '@models/credit-cart/credit-card.model';
+import { Order } from '@models/order/order.model';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { v4 as uuidv4 } from 'uuid';
-import { OrderService } from 'src/app/services/order/order.service';
+import { OrderService } from '@services/order/order.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +24,14 @@ export class CheckoutComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   selectedCity: string = '';
-  cityList: string[] = ['Barcelona', 'Madrid', 'Valencia', 'Sevilla', 'Mallorca', 'Malaga'];
+  cityList: string[] = [
+    'Barcelona',
+    'Madrid',
+    'Valencia',
+    'Sevilla',
+    'Mallorca',
+    'Malaga'
+  ];
   orderId: string;
 
   constructor(
@@ -56,12 +70,9 @@ export class CheckoutComponent implements OnInit {
       cardHolderName: ['', Validators.required],
       cardNumber: [
         '',
-        [
-          Validators.required,
-          Validators.pattern('[0-9]{10,20}'),
-        ]
+        [Validators.required, Validators.pattern('[0-9]{10,20}')]
       ],
-      cardExpiryDate: ['', [Validators.required, this.futureTimeValidator() ]],
+      cardExpiryDate: ['', [Validators.required, this.futureTimeValidator()]],
       cardSecurityCode: [
         '',
         [Validators.required, Validators.pattern('[0-9]{3}')]
@@ -69,12 +80,12 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  generateOrderId(){
+  generateOrderId() {
     this.orderId = uuidv4();
     this.form.value.orderId = uuidv4();
   }
 
-  addCartItemDataToOrder(){
+  addCartItemDataToOrder() {
     this.form.value.cartItems = this.cart.getCartItems();
     this.form.value.totalPurchasePrice = this.cart.getCartPrice();
   }
@@ -86,7 +97,7 @@ export class CheckoutComponent implements OnInit {
     this.form.reset();
   }
 
-  redirectToOrderSentPage(){
+  redirectToOrderSentPage() {
     this.router.navigate(['/order-sent']);
   }
 
@@ -94,17 +105,19 @@ export class CheckoutComponent implements OnInit {
     if (this.form.valid) {
       this.generateOrderId();
       this.addCartItemDataToOrder();
-      await this.db.object(`/orders/${this.orderId}`).set(this.form.value)
-      .then(() => {
-        console.log('Data sent succesfully to Firebase database');
-        this.submitted = true;
-        this.orderService.setOrderData(this.form.value);
-        this.resetAndClearFields();
-        this.redirectToOrderSentPage();
-      })
-      .catch((error) => {
-        console.error('Error submitting data to Firebase database', error);
-      });
+      await this.db
+        .object(`/orders/${this.orderId}`)
+        .set(this.form.value)
+        .then(() => {
+          console.log('Data sent succesfully to Firebase database');
+          this.submitted = true;
+          this.orderService.setOrderData(this.form.value);
+          this.resetAndClearFields();
+          this.redirectToOrderSentPage();
+        })
+        .catch((error) => {
+          console.error('Error submitting data to Firebase database', error);
+        });
     }
   }
 }
