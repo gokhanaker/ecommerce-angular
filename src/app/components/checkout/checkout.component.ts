@@ -14,6 +14,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderService } from '@services/order/order.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-checkout',
@@ -37,12 +38,11 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private order: Order,
     private creditCard: CreditCard,
-    private shoppingCart: Cart,
+    private cart: Cart,
     private fb: FormBuilder,
     private db: AngularFireDatabase,
     private orderService: OrderService,
-    private router: Router,
-    private cart: Cart
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -54,9 +54,9 @@ export class CheckoutComponent implements OnInit {
       const inputDate = new Date(control.value);
       const now = new Date();
       if (inputDate.getTime() < now.getTime()) {
-        return { pastTime: true }; // return object if the validation is not passed.
+        return { pastTime: true };
       }
-      return null; // return null if validation is passed.
+      return null;
     };
   }
 
@@ -82,18 +82,21 @@ export class CheckoutComponent implements OnInit {
 
   generateOrderId() {
     this.orderId = uuidv4();
-    this.form.value.orderId = uuidv4();
+    this.form.value.orderId = this.orderId;
   }
 
-  addCartItemDataToOrder() {
-    this.form.value.cartItems = this.cart.getCartItems();
-    this.form.value.totalPurchasePrice = this.cart.getCartPrice();
+  async addCartItemDataToOrder() {
+    const cartItems = await this.cart.getCartItems().pipe(take(1)).toPromise();
+    const totalPrice = await this.cart.getCartPrice().pipe(take(1)).toPromise();
+    
+    this.form.value.cartItems = cartItems;
+    this.form.value.totalPurchasePrice = totalPrice;
   }
 
   resetAndClearFields() {
     this.order.clear();
     this.creditCard.clear();
-    this.shoppingCart.clear();
+    this.cart.clear();
     this.form.reset();
   }
 
@@ -104,12 +107,12 @@ export class CheckoutComponent implements OnInit {
   async submitOrder() {
     if (this.form.valid) {
       this.generateOrderId();
-      this.addCartItemDataToOrder();
+      await this.addCartItemDataToOrder();
       await this.db
         .object(`/orders/${this.orderId}`)
         .set(this.form.value)
         .then(() => {
-          console.log('Data sent succesfully to Firebase database');
+          console.log('Data sent successfully to Firebase database');
           this.submitted = true;
           this.orderService.setOrderData(this.form.value);
           this.resetAndClearFields();

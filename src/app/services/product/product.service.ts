@@ -1,50 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../../model/product/product.model';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { ErrorHandlerService } from '../error/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private basePath = 'https://fakestoreapi.com';
+  private readonly basePath = 'https://fakestoreapi.com';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private errorHandler: ErrorHandlerService
+  ) {}
 
-  getAllProducts(): Observable<Product> {
+  getAllProducts(): Observable<Product[]> {
     return this.http
-      .get<Product>(this.basePath + '/products?sort=asc')
-      .pipe(retry(1), catchError(this.handleError));
+      .get<Product[]>(`${this.basePath}/products?sort=asc`)
+      .pipe(
+        retry(1),
+        catchError((error) => this.errorHandler.handleError(error))
+      );
   }
 
-  getAllCategories(): Observable<string> {
+  getAllCategories(): Observable<string[]> {
     return this.http
-      .get<string>(this.basePath + '/categories')
-      .pipe(retry(1), catchError(this.handleError));
+      .get<string[]>(`${this.basePath}/categories`)
+      .pipe(
+        retry(1),
+        catchError((error) => this.errorHandler.handleError(error))
+      );
   }
 
   getProductById(id: number): Observable<Product> {
     return this.http
-      .get<Product>(this.basePath + '/products/' + id)
-      .pipe(retry(1), catchError(this.handleError));
+      .get<Product>(`${this.basePath}/products/${id}`)
+      .pipe(
+        retry(1),
+        catchError((error) => this.errorHandler.handleError(error))
+      );
   }
 
-  getProductsByCategory(category: string): Observable<Product> {
+  getProductsByCategory(category: string): Observable<Product[]> {
     return this.http
-      .get<Product>(this.basePath + '/products/category/' + category)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
-  handleError(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent)
-      errorMessage = error.error.message; // Get client-side error
-    else
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;  // Get server-side error
-    console.log(errorMessage);
-    return throwError(() => {
-      return errorMessage;
-    });
+      .get<Product[]>(`${this.basePath}/products/category/${category}`)
+      .pipe(
+        retry(1),
+        catchError((error) => this.errorHandler.handleError(error))
+      );
   }
 }

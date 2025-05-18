@@ -1,63 +1,86 @@
 import { CartItem } from './cart-item.model';
 import { Product } from '../product/product.model';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class Cart {
-  public cartItems: CartItem[] = [];
-  public itemCount: number = 0;
-  public cartPrice: number = 0;
+  private cartItems$ = new BehaviorSubject<CartItem[]>([]);
+  private itemCount$ = new BehaviorSubject<number>(0);
+  private cartPrice$ = new BehaviorSubject<number>(0);
 
-  addCartItem(product: Product, quantity: number = 1) {
-    let cartItem = this.cartItems.find(
-      (cartItem) => cartItem.product.id === product.id
-    );
-    cartItem === undefined
-      ? this.cartItems.push(new CartItem(product, quantity))
-      : cartItem.quantity++;
+  constructor() {}
 
-    this.calculateCartPrice();
-  }
-
-  updateQuantity(product: Product, quantity: number = 1) {
-    let cartItem = this.cartItems.find(
-      (cartItem) => cartItem.product.id === product.id
+  addCartItem(product: Product, quantity: number = 1): void {
+    const currentItems = this.cartItems$.value;
+    const existingItem = currentItems.find(
+      (item) => item.product.id === product.id
     );
 
-    if (cartItem !== undefined) {
-      cartItem.quantity = quantity;
+    let updatedItems: CartItem[];
+    if (existingItem) {
+      updatedItems = currentItems.map(item =>
+        item.product.id === product.id
+          ? new CartItem(item.product, item.quantity + 1)
+          : item
+      );
+    } else {
+      updatedItems = [...currentItems, new CartItem(product, quantity)];
     }
 
+    this.cartItems$.next(updatedItems);
     this.calculateCartPrice();
   }
 
-  removeCartItem(id: number) {
-    this.cartItems = this.cartItems.filter(
-      (cartItem) => cartItem.product.id !== id
+  updateQuantity(product: Product, quantity: number): void {
+    if (quantity < 0) return;
+
+    const currentItems = this.cartItems$.value;
+    const updatedItems = currentItems.map(item =>
+      item.product.id === product.id
+        ? new CartItem(item.product, quantity)
+        : item
     );
+
+    this.cartItems$.next(updatedItems);
     this.calculateCartPrice();
   }
 
-  calculateCartPrice() {
-    this.itemCount = 0;
-    this.cartPrice = 0;
-    this.cartItems.forEach((cartItem) => {
-      this.itemCount += cartItem.quantity;
-      this.cartPrice += cartItem.quantity * cartItem.product.price;
-    });
+  removeCartItem(id: number): void {
+    const filteredItems = this.cartItems$.value.filter(
+      item => item.product.id !== id
+    );
+    this.cartItems$.next(filteredItems);
+    this.calculateCartPrice();
   }
 
-  getCartPrice(): number {
-    return this.cartPrice;
+  private calculateCartPrice(): void {
+    const items = this.cartItems$.value;
+    const itemCount = items.reduce((total, item) => total + item.quantity, 0);
+    const totalPrice = items.reduce(
+      (total, item) => total + item.quantity * item.product.price,
+      0
+    );
+
+    this.itemCount$.next(itemCount);
+    this.cartPrice$.next(totalPrice);
   }
 
-  getCartItems(): CartItem[] {
-    return this.cartItems;
+  getCartPrice(): Observable<number> {
+    return this.cartPrice$.asObservable();
   }
 
-  clear() {
-    this.cartItems = [];
-    this.itemCount = 0;
-    this.cartPrice = 0;
+  getCartItems(): Observable<CartItem[]> {
+    return this.cartItems$.asObservable();
+  }
+
+  getItemCount(): Observable<number> {
+    return this.itemCount$.asObservable();
+  }
+
+  clear(): void {
+    this.cartItems$.next([]);
+    this.itemCount$.next(0);
+    this.cartPrice$.next(0);
   }
 }

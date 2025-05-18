@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { IOrderData } from '../../model/order/order.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  public data: any;
-  constructor() { }
+  private data: IOrderData;
 
-  setOrderData(data: any) {
+  constructor() {}
+
+  setOrderData(data: IOrderData) {
     this.data = data;
   }
 
-  getOrderData() {
+  getOrderData(): IOrderData {
     return this.data;
   }
 }
