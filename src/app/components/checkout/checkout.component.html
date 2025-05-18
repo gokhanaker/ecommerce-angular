@@ -2,284 +2,228 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="card col-md-6">
-        <div class="card-header text-center">
-          <h3 >Order Form </h3>
-        </div>
-        <div class="card-body">
-          <section>
-            <h4 class="text-center mb-3">Product delivery</h4>
-            <form
-              (ngSubmit)="submitOrder()"
-              [formGroup]="form"
-            >
-              <div class="form-group mb-3">
-                <label for="name">Name</label>
-                <input
-                  id="name"
-                  class="form-control"
-                  type="text"
-                  formControlName="name"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['name'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['name'].invalid &&
-                    (form.controls['name'].dirty || form.controls['name'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['name'].errors &&
-                      form.controls['name'].errors.required
-                    "
+      <div class="card-header text-center">
+        <h3>Checkout</h3>
+      </div>
+      <div class="card-body">
+        <!-- Delivery Information Section -->
+        <section>
+          <h4 class="text-center">
+            <i class="fas fa-shipping-fast me-2"></i>Delivery Information
+          </h4>
+          <form [formGroup]="form" (ngSubmit)="submitOrder()">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                id="name"
+                class="form-control"
+                type="text"
+                formControlName="name"
+                placeholder="Enter your full name"
+                [ngClass]="{ 
+                  'valid-field': form.controls['name'].valid && form.controls['name'].touched
+                }"
+              />
+              <div
+                *ngIf="form.controls['name'].invalid && form.controls['name'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please enter your full name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                id="email"
+                class="form-control"
+                type="email"
+                formControlName="email"
+                placeholder="Enter your email address"
+                [ngClass]="{ 
+                  'valid-field': form.controls['email'].valid && form.controls['email'].touched
+                }"
+              />
+              <div
+                *ngIf="form.controls['email'].invalid && form.controls['email'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please enter a valid email address
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Delivery Address</label>
+              <input
+                id="address"
+                class="form-control"
+                type="text"
+                formControlName="address"
+                placeholder="Enter your delivery address"
+                [ngClass]="{ 
+                  'valid-field': form.controls['address'].valid && form.controls['address'].touched
+                }"
+              />
+              <div
+                *ngIf="form.controls['address'].invalid && form.controls['address'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please enter your delivery address
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cityDropdown">City</label>
+              <select 
+                class="form-select" 
+                id="cityDropdown"
+                formControlName="city"
+                [ngClass]="{'valid-field': form.controls['city'].valid && form.controls['city'].touched}"
+              >
+                <option value="">Select a city</option>
+                <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
+              </select>
+              <div
+                *ngIf="form.controls['city'].invalid && form.controls['city'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please select a city
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Additional Notes</label>
+              <textarea
+                id="notes"
+                class="form-control"
+                formControlName="notes"
+                placeholder="Any special instructions for delivery?"
+                rows="3"
+                [ngClass]="{ 
+                  'valid-field': form.controls['notes'].valid && form.controls['notes'].value?.length > 0
+                }"
+              ></textarea>
+              <div
+                *ngIf="form.controls['notes'].invalid && form.controls['notes'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Notes cannot exceed 300 characters
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- Payment Section -->
+        <section class="payment-section">
+          <h4 class="text-center">
+            <i class="fas fa-credit-card me-2"></i>Payment Details
+          </h4>
+          <form [formGroup]="form" (ngSubmit)="submitOrder()">
+            <div class="form-group">
+              <label for="cardHolderName">Card Holder Name</label>
+              <input
+                id="cardHolderName"
+                class="form-control"
+                type="text"
+                formControlName="cardHolderName"
+                placeholder="Name on card"
+                [ngClass]="{ 
+                  'valid-field': form.controls['cardHolderName'].valid && form.controls['cardHolderName'].touched
+                }"
+              />
+              <div
+                *ngIf="form.controls['cardHolderName'].invalid && form.controls['cardHolderName'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please enter the card holder's name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input
+                id="cardNumber"
+                class="form-control"
+                type="text"
+                formControlName="cardNumber"
+                placeholder="Card number"
+                [ngClass]="{ 
+                  'valid-field': form.controls['cardNumber'].valid && form.controls['cardNumber'].touched
+                }"
+              />
+              <div
+                *ngIf="form.controls['cardNumber'].invalid && form.controls['cardNumber'].touched"
+                class="alert alert-danger"
+              >
+                <i class="fas fa-exclamation-circle me-2"></i>
+                Please enter a valid card number
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="cardExpiryDate">Expiry Date</label>
+                  <input
+                    id="cardExpiryDate"
+                    class="form-control"
+                    type="month"
+                    formControlName="cardExpiryDate"
+                    [ngClass]="{ 
+                      'valid-field': form.controls['cardExpiryDate'].valid && form.controls['cardExpiryDate'].touched
+                    }"
+                  />
+                  <div
+                    *ngIf="form.controls['cardExpiryDate'].invalid && form.controls['cardExpiryDate'].touched"
+                    class="alert alert-danger"
                   >
-                    Please enter a name
-                  </span>
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    Please enter a valid expiry date
+                  </div>
                 </div>
               </div>
-              <div class="form-group mb-3">
-                <label for="email">Email</label>
-                <input
-                  id="email"
-                  class="form-control"
-                  type="email"
-                  formControlName="email"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['email'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['email'].invalid &&
-                    (form.controls['email'].dirty ||
-                      form.controls['email'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['email'].errors &&
-                      (form.controls['email'].errors.required || form.controls['email'].errors.email)
-                    "
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="cardSecurityCode">CVV</label>
+                  <input
+                    id="cardSecurityCode"
+                    class="form-control"
+                    type="text"
+                    formControlName="cardSecurityCode"
+                    placeholder="CVV"
+                    maxlength="3"
+                    [ngClass]="{ 
+                      'valid-field': form.controls['cardSecurityCode'].valid && form.controls['cardSecurityCode'].touched
+                    }"
+                  />
+                  <div
+                    *ngIf="form.controls['cardSecurityCode'].invalid && form.controls['cardSecurityCode'].touched"
+                    class="alert alert-danger"
                   >
-                    Please enter a valid email
-                  </span>
-                </div>
-              </div>        
-              <div class="form-group mb-3">
-                <label for="address">Address</label>
-                <input
-                  id="address"
-                  class="form-control"
-                  type="text"
-                  formControlName="address"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['address'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['address'].invalid &&
-                    (form.controls['address'].dirty ||
-                      form.controls['address'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['address'].errors &&
-                      form.controls['address'].errors.required
-                    "
-                  >
-                    Please enter an address
-                  </span>
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    Please enter a valid security code
+                  </div>
                 </div>
               </div>
-              <div class="form-group mb-3">
-                <label for="cityDropdown">Select City</label>
-                <select class="form-select" 
-                  id="cityDropdown"
-                  name="city" 
-                  formControlName="city"
-                  [ngClass]="{'valid-field': form.controls['city'].valid}"
-                >
-                  <option *ngFor="let city of cityList" [value]="city">{{ city }}</option>
-                </select>
-                <div
-                  *ngIf="
-                    form.controls['city'].invalid &&
-                    (form.controls['city'].dirty || form.controls['city'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['city'].errors &&
-                      form.controls['city'].errors.required
-                    "
-                  >
-                    Please select a city
-                  </span>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="notes">Notes</label>
-                <textarea
-                  id="notes"
-                  class="form-control"
-                  formControlName="notes"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['notes'].valid && form.controls['notes'].value.length > 0
-                  }"
-                ></textarea>
-                <div
-                  *ngIf="
-                    form.controls['notes'].invalid &&
-                    (form.controls['notes'].dirty ||
-                      form.controls['notes'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="form.controls['notes'].errors"
-                  >
-                    Notes section can not be longer than 300 characters
-                  </span>
-                </div>
-              </div>
-            </form>
-          </section>
-          <section>
-            <h4 class="text-center mb-3">Payment Details</h4>
-            <form
-              (ngSubmit)="submitOrder()"
-              [formGroup]="form"
-              class="m-2"
-            >
-              <div class="form-group mb-3">
-                <label for="name">Holder Name</label>
-                <input
-                  id="cardHolderName"
-                  class="form-control"
-                  type="text"
-                  formControlName="cardHolderName"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['cardHolderName'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['cardHolderName'].invalid &&
-                    (form.controls['cardHolderName'].dirty || form.controls['cardHolderName'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['cardHolderName'].errors &&
-                      form.controls['cardHolderName'].errors.required
-                    "
-                  >
-                    Please enter a card holder name
-                  </span>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="name">Card Number</label>
-                <input
-                  id="cardNumber"
-                  class="form-control"
-                  type="text"
-                  formControlName="cardNumber"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['cardNumber'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['cardNumber'].invalid &&
-                    (form.controls['cardNumber'].dirty || form.controls['cardNumber'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['cardNumber'].errors &&
-                      form.controls['cardNumber'].errors.required
-                    "
-                  >
-                    Please enter a card number
-                  </span>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="cardExpiryDate">Expiry Date</label>
-                <input
-                  id="cardExpiryDate"
-                  class="form-control"
-                  type="month"
-                  formControlName="cardExpiryDate"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['cardExpiryDate'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['cardExpiryDate'].invalid &&
-                    (form.controls['cardExpiryDate'].dirty || form.controls['cardExpiryDate'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['cardExpiryDate'].errors &&
-                      form.controls['cardExpiryDate'].errors.required
-                    "
-                  >
-                    Please enter a card expiry date
-                  </span>
-                </div>
-              </div>       
-              <div class="form-group mb-3">
-                <label for="cardSecurityCode">Security Code</label>
-                <input
-                  id="cardSecurityCode"
-                  class="form-control"
-                  type="text"
-                  formControlName="cardSecurityCode"
-                  [ngClass]="{ 
-                    'valid-field': form.controls['cardSecurityCode'].valid
-                  }"
-                />
-                <div
-                  *ngIf="
-                    form.controls['cardSecurityCode'].invalid &&
-                    (form.controls['cardSecurityCode'].dirty || form.controls['cardSecurityCode'].touched)
-                  "
-                  class="alert alert-danger"
-                >
-                  <span
-                    *ngIf="
-                      form.controls['cardSecurityCode'].errors &&
-                      form.controls['cardSecurityCode'].errors.required
-                    "
-                  >
-                    Please enter a card security code
-                  </span>
-                </div>
-              </div>
-              <div class="text-center">
-                <button class="btn btn-secondary" routerLink="/cart">Back</button>
-              <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
-                  Complete Order
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-secondary" routerLink="/cart">
+                <i class="fas fa-arrow-left me-2"></i>Back to Cart
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+                <i class="fas fa-check me-2"></i>Complete Order
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </div>
     <div class="col-md-3"></div>
   </div>

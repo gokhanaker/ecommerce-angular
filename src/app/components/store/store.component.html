@@ -1,44 +1,52 @@
 <main class="container">
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" (click)="changeCategory()">Ecommerce Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ecommerceStoreNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="ecommerceStoreNavbar">
-          <ul class="navbar-nav me-auto">
-            <li *ngFor="let cat of storeCategories" class="nav-item">
-              <a class="nav-link" (click)="changeCategory(cat)">{{cat}}</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Search" #searchInput>
-            <button class="btn btn-primary" type="button" (click)="getProductByName(searchInput.value)">Search</button>
-          </form>
+    <div class="container-fluid">
+      <a class="navbar-brand" (click)="changeCategory()">
+        <i class="fas fa-store me-2"></i>Ecommerce Store
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ecommerceStoreNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="ecommerceStoreNavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="!selectedCategory" (click)="changeCategory()">All Products</a>
+          </li>
+          <li *ngFor="let cat of storeCategories" class="nav-item">
+            <a class="nav-link" [class.active]="selectedCategory === cat" (click)="changeCategory(cat)">{{cat}}</a>
+          </li>
+        </ul>
+        <form class="d-flex search-form">
+          <input class="form-control me-2 search-input" type="text" placeholder="Search products..." #searchInput>
+          <button class="btn btn-primary search-button" type="button" (click)="getProductByName(searchInput.value)">
+            <i class="fas fa-search me-1"></i>Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="product-grid">
+    <div *ngFor="let product of displayedProducts; let i=index" class="product-card">
+      <div class="card">
+        <div class="card-img-container">
+          <img [src]="product.image" class="card-img-top" [alt]="product.title">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title" [title]="product.title">{{truncateProductTitle(product.title)}}</h5>
+          <p class="card-text">{{product.price | currency:"USD"}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="rating">
+              <span *ngFor="let star of generateStarsArray(product.rating.rate)" class="fa fa-star checked"></span>
+              <span *ngFor="let star of generateStarsArray(5-product.rating.rate)" class="fa fa-star"></span>
+              <small class="text-muted ms-2">({{product.rating.count}})</small>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-add-cart w-100 mt-3" (click)="addSelectedProductToCart(product)">
+            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+          </button>
         </div>
       </div>
-  </nav>
-  <div class="row">
-      <div *ngFor="let product of displayedProducts; let i=index" class="col-md-4">
-            <div class="card flex-column p-3">
-                <img 
-                  src="{{product.image}}" 
-                  class="card-img-top zoom-in-effect mx-auto"  
-                  alt="Product Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{truncateProductTitle(product.title)}}</h5>
-                    <p class="card-text"> Price: {{product.price | currency:"USD"}} </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="rating">
-                        <span *ngFor="let star of generateStarsArray(product.rating.rate); let i=index" class="fa fa-star checked"></span>
-                        <span *ngFor="let star of generateStarsArray(5-product.rating.rate); let i=index" class="fa fa-star"></span>
-                      </div>
-                      <a class="btn btn-primary"
-                      (click)="addSelectedProductToCart(product)">
-                    Add To Cart</a>
-                  </div>
-                </div>
-            </div>
-      </div>
+    </div>
   </div>
 </main>

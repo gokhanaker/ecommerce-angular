@@ -1,30 +1,138 @@
-.card label, h3, h4 {
-    color: white;
-}
-
-section form button {
-    margin: 1rem 0.5rem;
+.card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .card-header {
-    background-color: #34568B;
+    background-color: #4a90e2;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    padding: 1.5rem;
+}
+
+.card-header h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0;
 }
 
 .card-body {
-    background-color: #92A8D1;
+    background-color: #f8f9fa;
+    padding: 2rem;
 }
 
-.card-body section .form-group {
-    width: 70%;
-    margin: 0 auto;
+.card-body h4 {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 1.5rem;
 }
 
-.card-body form .valid-field {
-    background-color: #90ee90;
-    border: 1px solid green;
+.form-group {
+    margin-bottom: 1.5rem;
 }
 
-.card-body form .invalid-field {
-    background-color: lightcoral;
-    border: 1px solid red;
+.form-group label {
+    color: #2c3e50;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.form-select {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.valid-field {
+    background-color: #f0fff4 !important;
+    border-color: #48bb78 !important;
+}
+
+.alert-danger {
+    background-color: #fff5f5;
+    border-color: #feb2b2;
+    color: #c53030;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: #718096;
+    border-color: #718096;
+}
+
+.btn-secondary:hover {
+    background-color: #4a5568;
+    border-color: #4a5568;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    border-color: #357abd;
+}
+
+.btn-primary:disabled {
+    background-color: #cbd5e0;
+    border-color: #cbd5e0;
+}
+
+/* Payment section styling */
+.payment-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .form-group {
+        width: 100% !important;
+    }
+    
+    .btn {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
 }

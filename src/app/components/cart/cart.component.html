@@ -2,62 +2,76 @@
     <div class="row">
         <div class="col-md-2"></div>
         <section class="col-md-8 card">
-            <h3 class="card-header text-center">Shopping Cart</h3>
-            <div class="card-body text-center">
-                <table class="table table-hover table-responsive-sm">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Selected Products</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col" class="text-center">Product Price</th>
-                            <th scope="col" class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let cartItem of cartItems$ | async">
-                            <td>{{cartItem.product.title}}
-                                <br>
-                                <img src="{{cartItem.product.image}}" alt="product image" width="50" height="50">
-                            </td>
-                            <td>
-                                <div class="form-group">
+            <div class="card-header text-center">
+                <h3><i class="fas fa-shopping-cart me-2"></i>Shopping Cart</h3>
+            </div>
+            
+            <ng-container *ngIf="(cartItems$ | async)?.length; else emptyCart">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col" class="text-center">Price</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cartItem of cartItems$ | async">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img [src]="cartItem.product.image" [alt]="cartItem.product.title" class="product-image me-3">
+                                        <span class="product-title">{{cartItem.product.title}}</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
                                     <input type="number"
-                                           min="0"
-                                           class="form-control form-control-sm"
+                                           min="1"
+                                           class="quantity-input"
                                            [value]="cartItem.quantity"
                                            (change)="updateQuantity(cartItem, $event.target.value)"/>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                {{cartItem.product.price | currency:"USD"}}
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-danger"
-                                        (click)="removeItem(cartItem.product.id)">
-                                        Remove
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>    
-                    <tfoot>
-                        <tr class="active">
-                            <td colspan="2"></td>
-                            <td colspan="1">Total Price:</td>
-                            <td class="text-center">
-                                {{cartPrice$ | async | currency:"USD"}}
-                            </td> 
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-secondary" routerLink="/store">Go Back To Store</button>
-                <button class="btn btn-primary" 
-                        routerLink="/checkout" 
-                        [disabled]="!(itemCount$ | async) || !(cartPrice$ | async)">
-                    Order
-                </button>
-            </div>
+                                </td>
+                                <td class="text-center">
+                                    {{cartItem.product.price | currency:"USD"}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-remove" (click)="removeItem(cartItem.product.id)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="card-footer">
+                    <div class="total-price">
+                        Total: {{cartPrice$ | async | currency:"USD"}}
+                    </div>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-secondary" routerLink="/store">
+                            <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                        </button>
+                        <button class="btn btn-primary" 
+                                routerLink="/checkout" 
+                                [disabled]="!(itemCount$ | async)">
+                            <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+            
+            <ng-template #emptyCart>
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4>Your Cart is Empty</h4>
+                    <p>Looks like you haven't added any items to your cart yet.</p>
+                    <button class="btn btn-primary" routerLink="/store">
+                        <i class="fas fa-store me-2"></i>Start Shopping
+                    </button>
+                </div>
+            </ng-template>
         </section>
         <div class="col-md-2"></div>
     </div>
