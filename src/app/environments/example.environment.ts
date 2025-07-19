@@ -1,13 +1,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'API_KEY',
-    authDomain: 'AUTH_DOMAIN',
-    databaseURL: 'DATABASE_URL',
-    projectId: 'PROJECT_ID',
-    storageBucket: 'STORAGE_BUCKET',
-    messagingSenderId: 'MESSAGING_SENDER_ID',
-    appId: 'APP_ID',
-    measurementId: 'MEASUREMENT_ID'
+    apiKey: 'YOUR_API_KEY',
+    authDomain: 'YOUR_AUTH_DOMAIN',
+    databaseURL: 'YOUR_DATABASE_URL',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_STORAGE_BUCKET',
+    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+    appId: 'YOUR_APP_ID',
+    measurementId: 'YOUR_MEASUREMENT_ID'
   }
 };
